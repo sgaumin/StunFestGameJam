@@ -3,14 +3,11 @@ using UnityEngine;
 
 public class HeadCable : MonoBehaviour
 {
-    private bool _isPlug;
-    
-    private void OnTriggerEnter(Collider other)
+    [HideInInspector] public bool isPlug;
+
+    public void ConnectHead(Vector3 plugPos)
     {
-        var plug = other.GetComponent<Plug>();
-        if (plug != null)
-        {
-            _isPlug = true;
-        }
+        isPlug = true;
+        transform.position = plugPos;
     }
 }

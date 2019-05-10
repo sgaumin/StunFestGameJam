@@ -36,7 +36,7 @@ public class MouseManager : MonoBehaviour
         if (currentObjectToDrag != null)
         {
             Vector3 dragPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            dragPosition.z = -5f;
+            dragPosition.z = -0.1f;
             
             currentObjectToDrag.transform.position = dragPosition;
         }

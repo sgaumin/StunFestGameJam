@@ -153,7 +153,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -262,7 +262,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cablePrefab: {fileID: 1681951946239525344, guid: 1fffb99744515e7469f9f2fce164ef89,
     type: 3}
-  currentObjectToDrag: {fileID: 0}
 --- !u!4 &400795927
 Transform:
   m_ObjectHideFlags: 0
@@ -467,8 +466,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 973265381}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.031, y: -0.079, z: -0.1}
-  m_LocalScale: {x: 0.3321, y: 0.3321, z: 0.3321}
+  m_LocalPosition: {x: 0.031, y: -0.069000006, z: -0.02}
+  m_LocalScale: {x: 0.3321, y: 0.3321, z: 1}
   m_Children: []
   m_Father: {fileID: 947639322}
   m_RootOrder: 1
@@ -577,8 +576,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1284617114}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.031000005, y: -0.079, z: -0.1}
-  m_LocalScale: {x: 0.3321, y: 0.3321, z: 0.3321}
+  m_LocalPosition: {x: -0.031000005, y: -0.069, z: -0.02}
+  m_LocalScale: {x: 0.3321, y: 0.3321, z: 1}
   m_Children: []
   m_Father: {fileID: 947639322}
   m_RootOrder: 0
