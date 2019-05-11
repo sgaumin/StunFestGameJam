@@ -20,7 +20,7 @@ public class ScreenController : MonoBehaviour
     public static List<string> existingCharacters = new List<string>();
     static System.Random random = new System.Random();
 
-    public float timerTime = 10F;
+    public float timerSpeed = 1F;
     float originalSize;
     float totalTime = 0F;
 
@@ -34,6 +34,11 @@ public class ScreenController : MonoBehaviour
         _screen = GetComponent<Screen>();
         
         originalSize = timerFill.rectTransform.rect.height;
+<<<<<<< HEAD
+=======
+        mire.SetActive(false);
+
+>>>>>>> parent of 188937a... Ajusted border + timer in bubble
         CreateCharacter();
     }
 
@@ -41,13 +46,11 @@ public class ScreenController : MonoBehaviour
     void Update()
     {
         totalTime += Time.deltaTime;
-       // if (timerFill.rectTransform.rect.height > 0)
-        if(totalTime < timerTime)
+        if(timerFill.rectTransform.rect.height > 0)
         {
             // resize the timer fill
-            //float newSize = originalSize * (1 - totalTime * timerTime);
-            //timerFill.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, newSize);
-            timerFill.fillAmount -= 1.0f / timerTime * Time.deltaTime;
+            float newSize = originalSize * (1 - totalTime * timerSpeed);
+            timerFill.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, newSize);
         } else
         {
             Debug.Log("timer over");
