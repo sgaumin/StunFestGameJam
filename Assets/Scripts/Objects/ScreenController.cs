@@ -26,12 +26,16 @@ public class ScreenController : MonoBehaviour
     public Image timerFill;
 
     private Screen _screen;
-        
+
+    GameObject bubble;
+
+
     // Start is called before the first frame update
     void Start()
     {
         _screen = GetComponent<Screen>();
-
+        bubble = transform.Find("Bubble").gameObject;
+        bubble.SetActive(false);
         timerFill.fillAmount = 1F;
 
         CreateCharacter();
@@ -40,20 +44,36 @@ public class ScreenController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        totalTime += Time.deltaTime;
-        if(totalTime <= timerTime)
+        if(bubble.activeSelf)
         {
-            // resize the timer fill
-            timerFill.fillAmount = 1- totalTime / timerTime;
-        } else
-        {
-            _screen.ScreenOver();
+            if (totalTime <= timerTime)
+            {
+                totalTime += Time.deltaTime;
+                // resize the timer fill
+                timerFill.fillAmount = 1 - totalTime / timerTime;
+            }
+            else
+            {
+                _screen.ScreenOver();
+            }
         }
+
     }
 
     public void ResetTimer()
     {
         totalTime = 0;
+        timerFill.fillAmount = 1;
+    }
+
+    public void HideBubble()
+    {
+        bubble.SetActive(false);
+    }
+
+    public void ShowBubble()
+    {
+        bubble.SetActive(true);
     }
 
     void CreateCharacter()

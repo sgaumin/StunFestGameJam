@@ -45,7 +45,7 @@ public class Screen : MonoBehaviour
     public void GenerateDemand()
     {
         _demandGenerated = true;
-        
+
         _messageDemand = Instantiate(messagePrefab, messageTransform.position + Vector3.back / 10, Quaternion.identity);
         _messageDemand.gameObject.SetActive(false);
         _messageDemand.transform.SetParent(messageTransform);
@@ -54,6 +54,8 @@ public class Screen : MonoBehaviour
         _messageDemand.messageShape = (MessageShapes) Random.Range(0, 3);
 
         _messageDemand.InitMessage();
+
+        _screen.ShowBubble();
 
         messageDemandImage.sprite = _messageDemand.GetComponent<SpriteRenderer>().sprite;
         messageDemandImage.color = _messageDemand.GetComponent<SpriteRenderer>().color;
@@ -75,6 +77,7 @@ public class Screen : MonoBehaviour
 
     public void CompareMessage(Message receivedMessage)
     {
+        _screen.HideBubble();
         if ((receivedMessage.messageColor == _messageDemand.messageColor) &&
             (receivedMessage.messageShape == _messageDemand.messageShape))
         {
