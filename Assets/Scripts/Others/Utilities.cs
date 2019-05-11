@@ -4,7 +4,14 @@
 public enum PlugType
 {
     In,
-    Out
+    Out,
+}
+
+[Serializable]
+public enum PlugRole
+{
+    Screen,
+    Changer
 }
 
 [Serializable]
@@ -12,6 +19,13 @@ public enum HeadType
 {
     FirstHead,
     SecondHead
+}
+
+[Serializable]
+public enum MessageChangerType
+{
+    Shape,
+    Color
 }
 
 [Serializable]

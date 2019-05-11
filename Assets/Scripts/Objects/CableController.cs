@@ -9,7 +9,7 @@ public class CableController : MonoBehaviour
     public Screen screen;
     public bool isConnected;
 
-    [SerializeField] private GameObject cable;
+    public GameObject cable;
 
     private void Awake()
     {
@@ -37,8 +37,8 @@ public class CableController : MonoBehaviour
         // Launch Message from the screen to cable
         if (screen != null)
         {
-            screen.cable = cable.GetComponent<LineRenderer>();
-            screen.SpawnSymbol();
+            screen.cableController = this;
+            screen.SpawnMessage();
         }
     }
 }

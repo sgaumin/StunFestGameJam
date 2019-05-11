@@ -25,7 +25,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8779966921508309344}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.68, y: 2.83, z: 0}
   m_LocalScale: {x: 12.725, y: 12.725, z: 12.725}
   m_Children:
@@ -94,10 +94,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b89a183715ecc7d42b3cb2fb5d11e887, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  symbolMessagePrefab: {fileID: 7772130346626155120, guid: 652cacd34a348a74b93a1f5c2fe8cace,
-    type: 3}
   plugIn: {fileID: 8779966922927419109}
-  cable: {fileID: 0}
+  _symbolMessagePrefab: {fileID: 7772130346626155120, guid: 652cacd34a348a74b93a1f5c2fe8cace,
+    type: 3}
+  cableController: {fileID: 0}
 --- !u!1 &8779966921544549533
 GameObject:
   m_ObjectHideFlags: 0
@@ -208,7 +208,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plugType: 1
+  plugRole: 0
   isUsed: 0
+  cableController: {fileID: 0}
 --- !u!1 &8779966922927419106
 GameObject:
   m_ObjectHideFlags: 0
@@ -319,4 +321,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plugType: 0
+  plugRole: 0
   isUsed: 0
+  cableController: {fileID: 0}

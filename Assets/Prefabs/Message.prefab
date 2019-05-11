@@ -69,15 +69,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 0, g: 1, b: 0.31178236, a: 1}
+  m_Sprite: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 0.2, y: 0.2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &7772130346626155120
@@ -92,5 +92,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77cc2411ed5ae6845bffd7be5c0dfbc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  messageColor: 1
-  messageShape: 1
+  messageColor: 2
+  messageShape: 2
+  cableController: {fileID: 0}
+  triangle: {fileID: 21300000, guid: 63affdc9d5a529546ad1fd72df8cb23b, type: 3}
+  cube: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  circle: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}

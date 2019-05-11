@@ -2,19 +2,26 @@
 
 public class Screen : MonoBehaviour
 {
-    public Message symbolMessagePrefab;
+#pragma warning disable 0649 
 
     [SerializeField] private Plug plugIn;
-
-    [HideInInspector] public LineRenderer cable;
+    [SerializeField] private Message symbolMessagePrefab;
     
-    public void SpawnSymbol()
+    [HideInInspector] public CableController cableController;
+
+    private Message _message;
+
+    public void GenerateMessage()
+    {
+        _message = Instantiate(symbolMessagePrefab, Vector3.zero, Quaternion.identity);
+    }
+
+    public void SpawnMessage()
     {
         var position = plugIn.transform.position;
         position.z = -8f;
 
-        var message = Instantiate(symbolMessagePrefab, position, Quaternion.identity);
-        message.cable = cable;
-        message.FollowCable();
+        _message.cableController = cableController;
+        _message.FollowCable();
     }
 }

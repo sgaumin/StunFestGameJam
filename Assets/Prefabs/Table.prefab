@@ -110,7 +110,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plugType: 1
+  plugRole: 1
   isUsed: 0
+  cableController: {fileID: 0}
 --- !u!1 &1180565779172486403
 GameObject:
   m_ObjectHideFlags: 0
@@ -300,7 +302,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plugType: 0
+  plugRole: 1
   isUsed: 0
+  cableController: {fileID: 0}
 --- !u!1 &4104604584142868965
 GameObject:
   m_ObjectHideFlags: 0
@@ -411,7 +415,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plugType: 1
+  plugRole: 1
   isUsed: 0
+  cableController: {fileID: 0}
 --- !u!1 &4579199660039024467
 GameObject:
   m_ObjectHideFlags: 0
@@ -421,6 +427,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6301566827123140511}
+  - component: {fileID: 1044130389}
   m_Layer: 0
   m_Name: PortChanger (0)
   m_TagString: Untagged
@@ -444,6 +451,20 @@ Transform:
   m_Father: {fileID: 8290426880164262219}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1044130389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4579199660039024467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4fda5c571d2e4c4c8f230933c5d019a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  messageChangerType: 1
+  plugIn: {fileID: 4494069161183880676}
 --- !u!1 &5798767026032156019
 GameObject:
   m_ObjectHideFlags: 0
@@ -453,6 +474,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3867277742373636225}
+  - component: {fileID: 565173460}
   m_Layer: 0
   m_Name: PortChanger (2)
   m_TagString: Untagged
@@ -476,6 +498,20 @@ Transform:
   m_Father: {fileID: 8290426880164262219}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &565173460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5798767026032156019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4fda5c571d2e4c4c8f230933c5d019a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  messageChangerType: 1
+  plugIn: {fileID: 1370985451191096039}
 --- !u!1 &7730555340894233984
 GameObject:
   m_ObjectHideFlags: 0
@@ -586,7 +622,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plugType: 1
+  plugRole: 1
   isUsed: 0
+  cableController: {fileID: 0}
 --- !u!1 &7918835326132598218
 GameObject:
   m_ObjectHideFlags: 0
@@ -697,7 +735,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plugType: 0
+  plugRole: 1
   isUsed: 0
+  cableController: {fileID: 0}
 --- !u!1 &8290426880164262217
 GameObject:
   m_ObjectHideFlags: 0
@@ -891,7 +931,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plugType: 0
+  plugRole: 1
   isUsed: 0
+  cableController: {fileID: 0}
 --- !u!1 &8574816992782379977
 GameObject:
   m_ObjectHideFlags: 0
@@ -901,6 +943,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7538220933767830369}
+  - component: {fileID: 2077874466}
   m_Layer: 0
   m_Name: PortChanger (1)
   m_TagString: Untagged
@@ -924,3 +967,17 @@ Transform:
   m_Father: {fileID: 8290426880164262219}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2077874466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8574816992782379977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4fda5c571d2e4c4c8f230933c5d019a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  messageChangerType: 1
+  plugIn: {fileID: 8794294945676971528}
