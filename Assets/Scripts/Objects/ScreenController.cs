@@ -36,7 +36,10 @@ public class ScreenController : MonoBehaviour
         originalSize = timerFill.rectTransform.rect.height;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 188937a... Ajusted border + timer in bubble
 =======
 >>>>>>> parent of 188937a... Ajusted border + timer in bubble
         mire.SetActive(false);
