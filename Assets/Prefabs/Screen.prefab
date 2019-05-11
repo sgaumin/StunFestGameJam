@@ -94,9 +94,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b89a183715ecc7d42b3cb2fb5d11e887, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  symbolMessagePrefab: {fileID: 6416902252616068692, guid: 652cacd34a348a74b93a1f5c2fe8cace,
+  symbolMessagePrefab: {fileID: 7772130346626155120, guid: 652cacd34a348a74b93a1f5c2fe8cace,
     type: 3}
   plugIn: {fileID: 8779966922927419109}
+  cable: {fileID: 0}
 --- !u!1 &8779966921544549533
 GameObject:
   m_ObjectHideFlags: 0

@@ -181,6 +181,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firstHead: {fileID: 6420657557002512850}
   secondHead: {fileID: 1681951946563315980}
+  screen: {fileID: 0}
+  isConnected: 0
   cable: {fileID: 1681951946294383324}
 --- !u!1 &1681951946294383324
 GameObject:
@@ -231,7 +233,7 @@ MonoBehaviour:
   sagAmplitude: 2
   swayMultiplier: 1
   swayXMultiplier: 0
-  swayYMultiplier: 1
+  swayYMultiplier: 0.3
   swayFrequency: 1
 --- !u!120 &1681951946294383314
 LineRenderer:
@@ -272,10 +274,10 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: -5}
-  - {x: 0.72, y: -1.4876602, z: -5}
-  - {x: 1.44, y: -2.1038692, z: -5}
-  - {x: 2.16, y: -1.4876602, z: -5}
-  - {x: 2.88, y: 0.00000018392609, z: -5}
+  - {x: 0.72, y: -1.3082798, z: -5}
+  - {x: 1.44, y: -1.850187, z: -5}
+  - {x: 2.16, y: -1.3082798, z: -5}
+  - {x: 2.88, y: 0.00000016174847, z: -5}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.07

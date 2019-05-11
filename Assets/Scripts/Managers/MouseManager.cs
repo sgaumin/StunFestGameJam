@@ -10,7 +10,6 @@ public class MouseManager : MonoBehaviour
 
     private GameObject _currentObjectToDrag;
     private CableController _cable;
-    private bool _isDragging;
 
     private void Awake()
     {
@@ -35,7 +34,6 @@ public class MouseManager : MonoBehaviour
     {
         if (_currentObjectToDrag == null)
         {
-            _isDragging = true;
             _cable = Instantiate(cablePrefab, transform.position, Quaternion.identity);
             _currentObjectToDrag = _cable.firstHead.gameObject;
         }
@@ -45,14 +43,12 @@ public class MouseManager : MonoBehaviour
     {
         if (_currentObjectToDrag == null)
         {
-            _isDragging = true;
             _currentObjectToDrag = _cable.secondHead.gameObject;
         }
     }
 
     public void EndDragging()
     {
-        _isDragging = false;
         _currentObjectToDrag = null;
     }
 }
