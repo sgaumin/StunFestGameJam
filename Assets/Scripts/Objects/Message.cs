@@ -18,10 +18,13 @@ public class Message : MonoBehaviour
     private SpriteRenderer _sprite;
     private LineRenderer _cable;
 
-    private void Start()
+    private void Awake()
     {
         _sprite = GetComponent<SpriteRenderer>();
+    }
 
+    private void Start()
+    {
         InitMessage();
     }
 
@@ -92,7 +95,7 @@ public class Message : MonoBehaviour
             }
         }
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.2f);
 
         CheckMessageWhenArrived();
     }
