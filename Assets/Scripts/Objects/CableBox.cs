@@ -4,6 +4,6 @@ public class CableBox : MonoBehaviour
 {
     private void OnMouseDown()
     {
-        MouseManager.instance.StartDragging();
+        MouseManager.Instance.StartDraggingFirstHead();
     }
 }

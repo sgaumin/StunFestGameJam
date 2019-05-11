@@ -2,5 +2,7 @@
 
 public class Plug : MonoBehaviour
 {
-    [SerializeField] private PlugType plugType;
+    public PlugType plugType;
+
+    public bool isUsed;
 }

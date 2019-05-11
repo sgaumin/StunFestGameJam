@@ -4,41 +4,55 @@ public class MouseManager : MonoBehaviour
 {
 #pragma warning disable 0649 
 
-    public static MouseManager instance;
+    public static MouseManager Instance;
+
+    [SerializeField] private CableController cablePrefab;
     
-    [SerializeField] private GameObject cablePrefab;
-    private bool isDragging;
-    private GameObject currentObjectToDrag;
+    private GameObject _currentObjectToDrag;
+    private CableController _cable;
+    private bool _isDragging;
 
     private void Awake()
     {
-        if (instance == null)
-            instance = this;
+        if (Instance == null)
+            Instance = this;
         else
             Destroy(gameObject);
     }
 
-    public void StartDragging()
+    public void StartDraggingFirstHead()
     {
-        isDragging = true;
-        var cable = Instantiate(cablePrefab, transform.position, Quaternion.identity);
-        currentObjectToDrag = cable;
+        if (_currentObjectToDrag == null)
+        {
+            _isDragging = true;
+            _cable = Instantiate(cablePrefab, transform.position, Quaternion.identity);
+            _currentObjectToDrag = _cable.firstHead.gameObject;
+        }
+    }
+
+    public void StartDraggingSecondHead()
+    {
+        if (_currentObjectToDrag == null)
+        {
+            _isDragging = true;
+            _currentObjectToDrag = _cable.secondHead.gameObject;
+        }
     }
 
     public void EndDragging()
     {
-        isDragging = false;
-        currentObjectToDrag = null;
+        _isDragging = false;
+        _currentObjectToDrag = null;
     }
 
     private void Update()
     {
-        if (currentObjectToDrag != null)
+        if (_currentObjectToDrag != null)
         {
             Vector3 dragPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             dragPosition.z = -0.1f;
-            
-            currentObjectToDrag.transform.position = dragPosition;
+
+            _currentObjectToDrag.transform.position = dragPosition;
         }
     }
 }
