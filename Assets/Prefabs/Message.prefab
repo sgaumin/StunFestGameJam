@@ -92,9 +92,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77cc2411ed5ae6845bffd7be5c0dfbc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  messageColor: 0
-  messageShape: 0
+  messageColor: 2
+  messageShape: 2
   cableController: {fileID: 0}
-  triangle: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  triangle: {fileID: 21300000, guid: 63affdc9d5a529546ad1fd72df8cb23b, type: 3}
   cube: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
   circle: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}

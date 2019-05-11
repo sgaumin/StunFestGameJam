@@ -38,7 +38,7 @@ public class CableController : MonoBehaviour
         if (screen != null)
         {
             screen.cableController = this;
-            screen.SpawnSymbol();
+            screen.SpawnMessage();
         }
     }
 }
