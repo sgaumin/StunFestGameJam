@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections;
+using System.IO;
 
 public class Message : MonoBehaviour
 {
@@ -11,9 +12,16 @@ public class Message : MonoBehaviour
 
     [HideInInspector] public CableController cableController;
 
-    [Space] [SerializeField] private Sprite triangle;
-    [SerializeField] private Sprite cube;
-    [SerializeField] private Sprite circle;
+    [Space] [SerializeField] private Sprite blueTriangle;
+    [SerializeField] private Sprite blueCube;
+    [SerializeField] private Sprite blueCircle;
+    [SerializeField] private Sprite greenTriangle;
+    [SerializeField] private Sprite greenCube;
+    [SerializeField] private Sprite greenCircle;
+    [SerializeField] private Sprite redTriangle;
+    [SerializeField] private Sprite redCube;
+    [SerializeField] private Sprite redCircle;
+
     [SerializeField] private float timePerNods = 0.1f;
 
     private SpriteRenderer _sprite;
@@ -32,36 +40,71 @@ public class Message : MonoBehaviour
     public void InitMessage()
     {
         _sprite.enabled = true;
-
-        switch (messageColor)
-        {
-            case MessageColors.Red:
-                _sprite.color = Color.red;
-                break;
-            case MessageColors.Green:
-                _sprite.color = Color.green;
-                break;
-            case MessageColors.Blue:
-                _sprite.color = Color.blue;
-                break;
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
+        string fileName = "";
 
         switch (messageShape)
         {
             case MessageShapes.Cube:
-                _sprite.sprite = cube;
+                fileName +="losange ";
                 break;
             case MessageShapes.Circle:
-                _sprite.sprite = circle;
+                fileName += "lune ";
                 break;
             case MessageShapes.Triangle:
-                _sprite.sprite = triangle;
+                fileName += "triangle ";
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
         }
+
+        switch (messageColor)
+        {
+            case MessageColors.Red:
+                fileName += "rouge";
+                break;
+            case MessageColors.Green:
+                fileName += "vert";
+                break;
+            case MessageColors.Blue:
+                fileName += "bleu";
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+
+        switch(fileName)
+        {
+            case "losange bleu":
+                _sprite.sprite = blueCube;
+                break;
+            case "lune bleu":
+                _sprite.sprite = blueCircle;
+                break;
+            case "triangle bleu":
+                _sprite.sprite = blueTriangle;
+                break;
+            case "losange vert":
+                _sprite.sprite = greenCube;
+                break;
+            case "lune vert":
+                _sprite.sprite = greenCircle;
+                break;
+            case "triangle vert":
+                _sprite.sprite = greenTriangle;
+                break;
+            case "losange rouge":
+                _sprite.sprite = redCube;
+                break;
+            case "lune rouge":
+                _sprite.sprite = redCircle;
+                break;
+            case "triangle rouge":
+                _sprite.sprite = redTriangle;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+
     }
 
     public void FollowCable()

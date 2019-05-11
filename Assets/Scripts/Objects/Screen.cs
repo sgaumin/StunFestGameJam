@@ -36,8 +36,13 @@ public class Screen : MonoBehaviour
         _message = Instantiate(messagePrefab, messageTransform.position + Vector3.back / 10, Quaternion.identity);
         _message.transform.SetParent(messageTransform);
 
-        _message.messageColor = (MessageColors) Random.Range(0, 3);
-        _message.messageShape = (MessageShapes) Random.Range(0, 3);
+        MessageColors messageColor = (MessageColors)Random.Range(0, 3);
+        MessageShapes messageShape = (MessageShapes)Random.Range(0, 3);
+
+        _screen.SetBackground(messageColor);
+
+        _message.messageColor = messageColor;
+        _message.messageShape = messageShape;
 
         _message.InitMessage();
     }

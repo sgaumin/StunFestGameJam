@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -57,6 +58,37 @@ public class ScreenController : MonoBehaviour
                 _screen.ScreenOver();
             }
         }
+
+    }
+
+    public void SetBackground(MessageColors color)
+    {
+        string backgroundFileName = "/Art/ScreenElements/fond ecran ";
+        switch (color)
+        {
+            case MessageColors.Red:
+                backgroundFileName += "rouge";
+                break;
+            case MessageColors.Green:
+                backgroundFileName += "vert";
+                break;
+            case MessageColors.Blue:
+                backgroundFileName += "bleu";
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+        backgroundFileName += ".png";
+
+        int backgroundWidth = 416;
+        int backgroundHeight = 286;
+
+        Image background = transform.Find("ScreenContent").GetComponent<Image>();
+        byte[] bytes = File.ReadAllBytes(Application.dataPath + backgroundFileName);
+        Texture2D backgroundTexture = new Texture2D(backgroundWidth, backgroundHeight);
+        backgroundTexture.LoadImage(bytes);
+        background.sprite = Sprite.Create(backgroundTexture, new Rect(0, 0, backgroundWidth, backgroundHeight),
+            new Vector2(0.5f, 0.0f), 1.0f);
 
     }
 
