@@ -49,7 +49,6 @@ public class MessageChanger : MonoBehaviour
                 throw new ArgumentOutOfRangeException();
         }
 
-
         // if cable connected to Out Plug, transform to plug
         if (plugIn.isUsed)
         {
@@ -57,12 +56,16 @@ public class MessageChanger : MonoBehaviour
             position.z = -8f;
             message.transform.position = position;
 
-            // Update Message
-            message.InitMessage();
 
             // Follow cable
-            message.cableController = plugIn.cableController;
-            message.FollowCable();
+            if (plugIn.cableController.isConnected)
+            {
+                // Update Message
+                message.InitMessage();
+
+                message.cableController = plugIn.cableController;
+                message.FollowCable();
+            }
         }
     }
 }

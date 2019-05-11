@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class Screen : MonoBehaviour
@@ -9,25 +10,51 @@ public class Screen : MonoBehaviour
     [SerializeField] private Plug plugIn;
     [SerializeField] private Message messagePrefab;
     [SerializeField] private Transform messageTransform;
-    
+
+    [SerializeField] private Image messageDemandImage;
+
     [HideInInspector] public CableController cableController;
 
+    private ScreenController _screen;    
+    private Message _messageDemand;
     private Message _message;
+    
+    public GameObject mire;
 
     private void Start()
     {
+        _screen = GetComponent<ScreenController>();
+        
         GenerateMessage();
+        GenerateDemand();
+        
+        mire.SetActive(false);
     }
 
     private void GenerateMessage()
     {
-        _message = Instantiate(messagePrefab, messageTransform.position + Vector3.back/10, Quaternion.identity);
+        _message = Instantiate(messagePrefab, messageTransform.position + Vector3.back / 10, Quaternion.identity);
         _message.transform.SetParent(messageTransform);
-        
-        _message.messageColor =  (MessageColors)Random.Range(0, 3);
-        _message.messageShape =  (MessageShapes)Random.Range(0, 3);
-        
+
+        _message.messageColor = (MessageColors) Random.Range(0, 3);
+        _message.messageShape = (MessageShapes) Random.Range(0, 3);
+
         _message.InitMessage();
+    }
+
+    private void GenerateDemand()
+    {
+        _messageDemand = Instantiate(messagePrefab, messageTransform.position + Vector3.back / 10, Quaternion.identity);
+        _messageDemand.gameObject.SetActive(false);
+        _messageDemand.transform.SetParent(messageTransform);
+
+        _messageDemand.messageColor = (MessageColors) Random.Range(0, 3);
+        _messageDemand.messageShape = (MessageShapes) Random.Range(0, 3);
+
+        _messageDemand.InitMessage();
+
+        messageDemandImage.sprite = _messageDemand.GetComponent<SpriteRenderer>().sprite;
+        messageDemandImage.color = _messageDemand.GetComponent<SpriteRenderer>().color;
     }
 
     public void SpawnMessage()
@@ -39,8 +66,36 @@ public class Screen : MonoBehaviour
         messageTemp.messageColor = _message.messageColor;
         messageTemp.messageShape = _message.messageShape;
         messageTemp.InitMessage();
-        
+
         messageTemp.cableController = cableController;
         messageTemp.FollowCable();
+    }
+
+    public void CompareMessage(Message receivedMessage)
+    {
+        if ((receivedMessage.messageColor == _messageDemand.messageColor) &&
+            (receivedMessage.messageShape == _messageDemand.messageShape))
+        {
+            // Win
+            _screen.ResetTimer();
+            GenerateDemand();
+        }
+        else
+        {
+            // Loose
+            ScreenOver();
+        }
+    }
+
+    public void ScreenOver()
+    {
+        // Show Mire
+        mire.SetActive(true);
+        
+        // Hide Messages
+        _message.gameObject.SetActive(false);
+        
+        // Stop Timer
+        
     }
 }

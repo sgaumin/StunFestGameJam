@@ -31,7 +31,7 @@ public class Message : MonoBehaviour
     public void InitMessage()
     {
         _sprite.enabled = true;
-        
+
         switch (messageColor)
         {
             case MessageColors.Red:
@@ -114,6 +114,8 @@ public class Message : MonoBehaviour
         else if (cableController.secondHead.plug.plugRole == PlugRole.Screen)
         {
             // Compare Color + Shape with Screen requirement
+            var screen = cableController.secondHead.plug.GetComponentInParent<Screen>();
+            screen.CompareMessage(this);
 
             // Destroy object
             Destroy(gameObject);
