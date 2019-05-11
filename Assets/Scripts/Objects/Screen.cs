@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -15,19 +15,19 @@ public class Screen : MonoBehaviour
 
     [HideInInspector] public CableController cableController;
 
-    private ScreenController _screen;    
+    private ScreenController _screen;
     private Message _messageDemand;
     private Message _message;
     public bool _demandGenerated;
-    
+
     public GameObject mire;
 
     private void Start()
     {
         _screen = GetComponent<ScreenController>();
-        
+
         GenerateMessage();
-        
+
         mire.SetActive(false);
     }
 
@@ -61,18 +61,28 @@ public class Screen : MonoBehaviour
         messageDemandImage.color = _messageDemand.GetComponent<SpriteRenderer>().color;
     }
 
-    public void SpawnMessage()
+    public void StartSendingMessage()
     {
-        var position = plugIn.transform.position;
-        position.z = -8f;
+        StartCoroutine(SpawnMessage());
+    }
 
-        var messageTemp = Instantiate(messagePrefab, position, Quaternion.identity);
-        messageTemp.messageColor = _message.messageColor;
-        messageTemp.messageShape = _message.messageShape;
-        messageTemp.InitMessage();
+    private IEnumerator SpawnMessage()
+    {
+        while (true)
+        {
+            var position = plugIn.transform.position;
+            position.z = -8f;
 
-        messageTemp.cableController = cableController;
-        messageTemp.FollowCable();
+            var messageTemp = Instantiate(messagePrefab, position, Quaternion.identity);
+            messageTemp.messageColor = _message.messageColor;
+            messageTemp.messageShape = _message.messageShape;
+            messageTemp.InitMessage();
+
+            messageTemp.cableController = cableController;
+            messageTemp.FollowCable();
+
+            yield return new WaitForSeconds(5f);
+        }
     }
 
     public void CompareMessage(Message receivedMessage)
@@ -102,11 +112,10 @@ public class Screen : MonoBehaviour
     {
         // Show Mire
         mire.SetActive(true);
-        
+
         // Hide Messages
         _message.gameObject.SetActive(false);
-        
+
         // Stop Timer
-        
     }
 }

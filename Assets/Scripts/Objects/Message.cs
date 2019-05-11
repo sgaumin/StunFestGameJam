@@ -14,6 +14,7 @@ public class Message : MonoBehaviour
     [Space] [SerializeField] private Sprite triangle;
     [SerializeField] private Sprite cube;
     [SerializeField] private Sprite circle;
+    [SerializeField] private float timePerNods = 0.1f;
 
     private SpriteRenderer _sprite;
     private LineRenderer _cable;
@@ -65,34 +66,41 @@ public class Message : MonoBehaviour
 
     public void FollowCable()
     {
-        StartCoroutine(GoToNextPosition(2f));
+        StartCoroutine(GoToNextPosition(timePerNods));
     }
 
     private IEnumerator GoToNextPosition(float time)
     {
         _cable = cableController.cable.GetComponent<LineRenderer>();
-
-        for (int i = 1; i < _cable.positionCount; i++)
+        if (_cable != null)
         {
-            float elapsedTime = 0;
-            Vector3 startingPos = transform.position;
-            while (elapsedTime < time)
+            for (int i = 1; i < _cable.positionCount; i++)
             {
-                if (_cable != null)
+                float elapsedTime = 0;
+                Vector3 startingPos = transform.position;
+                while (elapsedTime < time)
                 {
-                    var tempPos = _cable.GetPosition(i);
-                    tempPos.z = startingPos.z;
+                    if (_cable != null)
+                    {
+                        var tempPos = _cable.GetPosition(i);
+                        tempPos.z = startingPos.z;
 
-                    transform.position = Vector3.Lerp(startingPos, tempPos, (elapsedTime / time));
-                    elapsedTime += Time.deltaTime;
-                    yield return null;
-                }
-                else
-                {
-                    Destroy(gameObject);
-                    yield break;
+                        transform.position = Vector3.Lerp(startingPos, tempPos, (elapsedTime / time));
+                        elapsedTime += Time.deltaTime;
+                        yield return null;
+                    }
+                    else
+                    {
+                        Destroy(gameObject);
+                        yield break;
+                    }
                 }
             }
+        }
+        else
+        {
+            Destroy(gameObject);
+            yield break;
         }
 
         yield return new WaitForSeconds(0.2f);

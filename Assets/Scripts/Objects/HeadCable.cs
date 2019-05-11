@@ -63,7 +63,11 @@ public class HeadCable : MonoBehaviour
     private void OnMouseDown()
     {
         if (_cableController.isConnected)
+        {
             Destroy(_cableController.gameObject);
+            if (_cableController != null)
+                _cableController.screen.StopAllCoroutines();
+        }
     }
 
     private void OnDestroy()
