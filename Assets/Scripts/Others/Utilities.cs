@@ -9,6 +9,13 @@ public enum PlugType
 }
 
 [Serializable]
+public enum ScreenStates
+{
+    Display,
+    Mire,
+}
+
+[Serializable]
 public enum PlugRole
 {
     Screen,
