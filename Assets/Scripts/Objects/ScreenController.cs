@@ -20,8 +20,7 @@ public class ScreenController : MonoBehaviour
     public static List<string> existingCharacters = new List<string>();
     static System.Random random = new System.Random();
 
-    public float timerSpeed = 1F;
-    float originalSize;
+    public float timerTime = 10F;
     float totalTime = 0F;
 
     public Image timerFill;
@@ -32,8 +31,9 @@ public class ScreenController : MonoBehaviour
     void Start()
     {
         _screen = GetComponent<Screen>();
-        
-        originalSize = timerFill.rectTransform.rect.height;
+
+        timerFill.fillAmount = 1F;
+
         CreateCharacter();
     }
 
@@ -41,15 +41,13 @@ public class ScreenController : MonoBehaviour
     void Update()
     {
         totalTime += Time.deltaTime;
-        if(timerFill.rectTransform.rect.height > 0)
+        if(totalTime <= timerTime)
         {
             // resize the timer fill
-            float newSize = originalSize * (1 - totalTime * timerSpeed);
-            timerFill.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, newSize);
+            timerFill.fillAmount = 1- totalTime / timerTime;
         } else
         {
-            Debug.Log("timer over");
-            // show the mire when time is over
+            _screen.ScreenOver();
         }
     }
 
