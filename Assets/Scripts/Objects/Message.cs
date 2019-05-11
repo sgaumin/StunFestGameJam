@@ -7,13 +7,15 @@ public class Message : MonoBehaviour
     public MessageColors messageColor;
     public MessageShapes messageShape;
 
-    public LineRenderer cable;
+    [HideInInspector] public CableController cableController;
 
-    private SpriteRenderer sprite;
+    private SpriteRenderer _sprite;
+    private LineRenderer _cable;
 
     private void Start()
     {
-        sprite = GetComponent<SpriteRenderer>();
+        _sprite = GetComponent<SpriteRenderer>();
+        _cable = GetComponent<LineRenderer>();
     }
 
     public void FollowCable()
@@ -23,25 +25,23 @@ public class Message : MonoBehaviour
 
     private IEnumerator GoToNextPosition(float time)
     {
-        for (int i = 0; i < cable.positionCount; i++)
+        for (int i = 0; i < _cable.positionCount; i++)
         {
             float elapsedTime = 0;
             Vector3 startingPos = transform.position;
             while (elapsedTime < time)
             {
-                if (cable != null)
+                if (_cable != null)
                 {
-                    transform.position = Vector3.Lerp(startingPos, cable.GetPosition(i), (elapsedTime / time));
+                    transform.position = Vector3.Lerp(startingPos, _cable.GetPosition(i), (elapsedTime / time));
                     elapsedTime += Time.deltaTime;
                     yield return null;
-                    
                 }
                 else
                 {
                     Destroy(gameObject);
                     yield break;
                 }
-                
             }
         }
 
@@ -53,10 +53,17 @@ public class Message : MonoBehaviour
     void CheckMessageWhenArrived()
     {
         // Hide message
-        sprite.enabled = false;
+        _sprite.enabled = false;
 
-        // Compare Color + Shape with Screen requirement
-        
+        if (cableController.secondHead.plug.plugRole == PlugRole.Changer)
+        {
+            // Change to new Message
+        }
+        else if (cableController.secondHead.plug.plugRole == PlugRole.Screen)
+        {
+            // Compare Color + Shape with Screen requirement
+        }
+
         // Destroy object
         Destroy(gameObject);
     }

@@ -37,7 +37,7 @@ public class CableController : MonoBehaviour
         // Launch Message from the screen to cable
         if (screen != null)
         {
-            screen.cable = cable.GetComponent<LineRenderer>();
+            screen.cableController = this;
             screen.SpawnSymbol();
         }
     }

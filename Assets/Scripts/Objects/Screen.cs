@@ -6,7 +6,7 @@ public class Screen : MonoBehaviour
 
     [SerializeField] private Plug plugIn;
 
-    [HideInInspector] public LineRenderer cable;
+    [HideInInspector] public CableController cableController;
     
     public void SpawnSymbol()
     {
@@ -14,7 +14,7 @@ public class Screen : MonoBehaviour
         position.z = -8f;
 
         var message = Instantiate(symbolMessagePrefab, position, Quaternion.identity);
-        message.cable = cable;
+        message.cableController = cableController;
         message.FollowCable();
     }
 }
