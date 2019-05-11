@@ -77,17 +77,23 @@ public class Screen : MonoBehaviour
 
     public void CompareMessage(Message receivedMessage)
     {
-        _screen.HideBubble();
-        if ((receivedMessage.messageColor == _messageDemand.messageColor) &&
-            (receivedMessage.messageShape == _messageDemand.messageShape))
+        if(_messageDemand != null)
         {
-            // Win
-            _screen.ResetTimer();
-            GenerateDemand();
-        }
-        else
+            _screen.HideBubble();
+            if ((receivedMessage.messageColor == _messageDemand.messageColor) &&
+                (receivedMessage.messageShape == _messageDemand.messageShape))
+            {
+                // Win
+                _screen.ResetTimer();
+                GenerateDemand();
+            }
+            else
+            {
+                // Loose
+                ScreenOver();
+            }
+        } else
         {
-            // Loose
             ScreenOver();
         }
     }
