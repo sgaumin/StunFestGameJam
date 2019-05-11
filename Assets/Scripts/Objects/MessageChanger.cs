@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class MessageChanger : MonoBehaviour
 {
+#pragma warning disable 0649 
+
     public MessageChangerType messageChangerType;
 
     [SerializeField] private Plug plugIn;

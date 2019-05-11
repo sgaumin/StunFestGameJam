@@ -18,6 +18,7 @@ public class Screen : MonoBehaviour
     private ScreenController _screen;    
     private Message _messageDemand;
     private Message _message;
+    private bool _demandGenerated;
     
     public GameObject mire;
 
@@ -44,6 +45,8 @@ public class Screen : MonoBehaviour
 
     private void GenerateDemand()
     {
+        _demandGenerated = true;
+        
         _messageDemand = Instantiate(messagePrefab, messageTransform.position + Vector3.back / 10, Quaternion.identity);
         _messageDemand.gameObject.SetActive(false);
         _messageDemand.transform.SetParent(messageTransform);
