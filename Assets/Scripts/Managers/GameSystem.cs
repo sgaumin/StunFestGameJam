@@ -65,14 +65,14 @@ public class GameSystem : MonoBehaviour
 
         int nubIteraction = Mathf.Min(_nbPhase, _screensDisplay.Count);
         
-        for (int i = 0; i < nubIteraction; i++)
+        for (int i = 0; i < 3; i++)
         {
             yield return new WaitForSeconds(Random.Range(minTime, maxTime));
 
             // Verify if Screens already spawns a message
             int rand = Random.Range(0, _screens.Length);
-            while (_screensDisplay[rand].demandGenerated)
-                rand = Random.Range(0, _screens.Length);
+//            while (_screensDisplay[rand].demandGenerated)
+//                rand = Random.Range(0, _screens.Length);
 
             // Spawn message
             _screens[rand].GenerateDemand();

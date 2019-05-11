@@ -8,7 +8,7 @@ public class Screen : MonoBehaviour
 #pragma warning disable 0649 
 
     public ScreenStates screenState = ScreenStates.Display;
-    
+
     [SerializeField] private Plug plugIn;
     [SerializeField] private Message messagePrefab;
     [SerializeField] private Transform messageTransform;
@@ -37,8 +37,8 @@ public class Screen : MonoBehaviour
         _message = Instantiate(messagePrefab, messageTransform.position + Vector3.back / 10, Quaternion.identity);
         _message.transform.SetParent(messageTransform);
 
-        MessageColors messageColor = (MessageColors)Random.Range(0, 3);
-        MessageShapes messageShape = (MessageShapes)Random.Range(0, 3);
+        MessageColors messageColor = (MessageColors) Random.Range(0, 3);
+        MessageShapes messageShape = (MessageShapes) Random.Range(0, 3);
 
         _screen.SetBackground(messageColor);
 
@@ -69,7 +69,8 @@ public class Screen : MonoBehaviour
 
     public void StartSendingMessage()
     {
-        StartCoroutine(SpawnMessage());
+        if (screenState == ScreenStates.Display)
+            StartCoroutine(SpawnMessage());
     }
 
     private IEnumerator SpawnMessage()
@@ -93,7 +94,7 @@ public class Screen : MonoBehaviour
 
     public void CompareMessage(Message receivedMessage)
     {
-        if(_messageDemand != null)
+        if (_messageDemand != null)
         {
             _screen.HideBubble();
             if ((receivedMessage.messageColor == _messageDemand.messageColor) &&
@@ -110,7 +111,8 @@ public class Screen : MonoBehaviour
                 // Loose
                 ScreenOver();
             }
-        } else
+        }
+        else
         {
             ScreenOver();
         }
@@ -125,10 +127,10 @@ public class Screen : MonoBehaviour
         _message.gameObject.SetActive(false);
 
         // Stop Timer
-        
+
         // Update Status
         screenState = ScreenStates.Mire;
-        
+
         // if demand message was created
         if (demandGenerated != null)
             GameSystem.Instance.messageReceived++;
