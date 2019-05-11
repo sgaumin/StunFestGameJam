@@ -951,7 +951,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timerSpeed: 0.01
   timerFill: {fileID: 6780354845555814310}
-  mire: {fileID: 588008678773274186}
 --- !u!114 &4834329565587165810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -970,6 +969,7 @@ MonoBehaviour:
   messageTransform: {fileID: 3104422657471613536}
   messageDemandImage: {fileID: 6780354844396624467}
   cableController: {fileID: 0}
+  mire: {fileID: 588008678773274186}
 --- !u!1 &6780354844951899377
 GameObject:
   m_ObjectHideFlags: 0

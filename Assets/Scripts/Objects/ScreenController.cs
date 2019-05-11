@@ -25,14 +25,15 @@ public class ScreenController : MonoBehaviour
     float totalTime = 0F;
 
     public Image timerFill;
-    public GameObject mire;
 
+    private Screen _screen;
+        
     // Start is called before the first frame update
     void Start()
     {
+        _screen = GetComponent<Screen>();
+        
         originalSize = timerFill.rectTransform.rect.height;
-        mire.SetActive(false);
-
         CreateCharacter();
     }
 
@@ -50,7 +51,6 @@ public class ScreenController : MonoBehaviour
         {
             Debug.Log("timer over");
             // show the mire when time is over
-            mire.SetActive(true);
         }
     }
 

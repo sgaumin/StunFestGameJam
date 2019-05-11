@@ -18,6 +18,8 @@ public class Screen : MonoBehaviour
     private ScreenController _screen;    
     private Message _messageDemand;
     private Message _message;
+    
+    public GameObject mire;
 
     private void Start()
     {
@@ -25,6 +27,8 @@ public class Screen : MonoBehaviour
         
         GenerateMessage();
         GenerateDemand();
+        
+        mire.SetActive(false);
     }
 
     private void GenerateMessage()
@@ -72,13 +76,26 @@ public class Screen : MonoBehaviour
         if ((receivedMessage.messageColor == _messageDemand.messageColor) &&
             (receivedMessage.messageShape == _messageDemand.messageShape))
         {
-            // WIN
+            // Win
             _screen.ResetTimer();
-            Debug.Log("Receive good message");
+            GenerateDemand();
         }
         else
         {
-            Debug.Log("Display Mire");
+            // Loose
+            ScreenOver();
         }
+    }
+
+    public void ScreenOver()
+    {
+        // Show Mire
+        mire.SetActive(true);
+        
+        // Hide Messages
+        _message.gameObject.SetActive(false);
+        
+        // Stop Timer
+        
     }
 }
