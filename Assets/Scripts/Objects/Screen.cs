@@ -7,6 +7,8 @@ public class Screen : MonoBehaviour
 {
 #pragma warning disable 0649 
 
+    public ScreenStates screenState = ScreenStates.Display;
+    
     [SerializeField] private Plug plugIn;
     [SerializeField] private Message messagePrefab;
     [SerializeField] private Transform messageTransform;
@@ -14,11 +16,11 @@ public class Screen : MonoBehaviour
     [SerializeField] private Image messageDemandImage;
 
     [HideInInspector] public CableController cableController;
+    [HideInInspector] public bool demandGenerated;
 
     private ScreenController _screen;
     private Message _messageDemand;
     private Message _message;
-    public bool _demandGenerated;
 
     public GameObject mire;
 
@@ -27,7 +29,6 @@ public class Screen : MonoBehaviour
         _screen = GetComponent<ScreenController>();
 
         GenerateMessage();
-
         mire.SetActive(false);
     }
 
@@ -49,7 +50,7 @@ public class Screen : MonoBehaviour
 
     public void GenerateDemand()
     {
-        _demandGenerated = true;
+        demandGenerated = true;
 
         _messageDemand = Instantiate(messagePrefab, messageTransform.position + Vector3.back / 10, Quaternion.identity);
         _messageDemand.gameObject.SetActive(false);
@@ -100,7 +101,9 @@ public class Screen : MonoBehaviour
             {
                 // Win
                 _screen.ResetTimer();
-                GenerateDemand();
+                _messageDemand = null;
+                demandGenerated = false;
+                GameSystem.Instance.messageReceived++;
             }
             else
             {
@@ -122,5 +125,12 @@ public class Screen : MonoBehaviour
         _message.gameObject.SetActive(false);
 
         // Stop Timer
+        
+        // Update Status
+        screenState = ScreenStates.Mire;
+        
+        // if demand message was created
+        if (demandGenerated != null)
+            GameSystem.Instance.messageReceived++;
     }
 }
