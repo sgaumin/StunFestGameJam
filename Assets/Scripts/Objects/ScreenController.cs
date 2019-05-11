@@ -37,7 +37,10 @@ public class ScreenController : MonoBehaviour
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 188937a... Ajusted border + timer in bubble
 =======
 >>>>>>> parent of 188937a... Ajusted border + timer in bubble
 =======
