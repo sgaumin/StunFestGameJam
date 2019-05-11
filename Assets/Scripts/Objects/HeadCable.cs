@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class HeadCable : MonoBehaviour
 {
@@ -39,6 +38,7 @@ public class HeadCable : MonoBehaviour
                             plug.isUsed = true;
 
                             _plug = plug;
+                            _cableController.screen = _plug.GetComponentInParent<Screen>();
                             _cableController.ActiveSecondHead();
                         }
                     }
@@ -50,6 +50,7 @@ public class HeadCable : MonoBehaviour
                             plug.isUsed = true;
 
                             _plug = plug;
+                            _cableController.ActiveConnection();
                         }
                     }
                 }
@@ -57,8 +58,15 @@ public class HeadCable : MonoBehaviour
         }
     }
 
+    private void OnMouseDown()
+    {
+        if (_cableController.isConnected)
+            Destroy(_cableController.gameObject);
+    }
+
     private void OnDestroy()
     {
-        _plug.isUsed = false;
+        if (_plug != null)
+            _plug.isUsed = false;
     }
 }

@@ -8,6 +8,9 @@ public class Screen : MonoBehaviour
     
     public void SpawnSymbol()
     {
-        var message = Instantiate(symbolMessagePrefab, plugIn.transform.position, Quaternion.identity);
+        var position = plugIn.transform.position;
+        position.z = -8f;
+        
+        var message = Instantiate(symbolMessagePrefab, position, Quaternion.identity);
     }
 }

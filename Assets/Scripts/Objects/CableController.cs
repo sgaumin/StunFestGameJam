@@ -1,10 +1,13 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
 
 public class CableController : MonoBehaviour
 {
     public HeadCable firstHead;
     public HeadCable secondHead;
+
+    public Screen screen;
+    public bool isConnected;
 
     [SerializeField] private GameObject cable;
 
@@ -14,18 +17,25 @@ public class CableController : MonoBehaviour
         cable.gameObject.SetActive(false);
     }
 
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(1)) // Left click
-        {
-            Destroy(gameObject);
-        }
-    }
-
     public void ActiveSecondHead()
     {
         secondHead.gameObject.SetActive(true);
         cable.gameObject.SetActive(true);
         MouseManager.Instance.StartDraggingSecondHead();
+    }
+
+    public void ActiveConnection()
+    {
+        StartCoroutine(ChangeStatus());
+    }
+
+    private IEnumerator ChangeStatus()
+    {
+        yield return new WaitForSeconds(0.2f);
+        isConnected = true;
+
+        // Launch Message from the screen to cable
+        if (screen != null)
+            screen.SpawnSymbol();
     }
 }
