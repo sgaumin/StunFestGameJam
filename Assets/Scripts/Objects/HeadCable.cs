@@ -66,7 +66,8 @@ public class HeadCable : MonoBehaviour
         {
             Destroy(_cableController.gameObject);
             if (_cableController != null)
-                _cableController.screen.StopAllCoroutines();
+                if (_cableController.screen != null)
+                    _cableController.screen.StopAllCoroutines();
         }
     }
 

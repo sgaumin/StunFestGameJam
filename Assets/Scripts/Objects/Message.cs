@@ -74,7 +74,9 @@ public class Message : MonoBehaviour
         _cable = cableController.cable.GetComponent<LineRenderer>();
         if (_cable != null)
         {
-            for (int i = 1; i < _cable.positionCount; i++)
+            int lenght = _cable.positionCount;
+            
+            for (int i = 1; i < lenght; i++)
             {
                 float elapsedTime = 0;
                 Vector3 startingPos = transform.position;
