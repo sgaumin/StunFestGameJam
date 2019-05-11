@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 [Serializable]
 public enum PlugType
@@ -42,4 +43,10 @@ public enum MessageShapes
     Cube,
     Circle,
     Triangle
+}
+
+public class Utilities : MonoBehaviour
+{
+    public const string MenuName = "Menu";
+    public const string CreditsName = "Credits";
 }
