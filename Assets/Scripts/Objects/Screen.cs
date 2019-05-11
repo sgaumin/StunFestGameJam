@@ -6,7 +6,7 @@ public class Screen : MonoBehaviour
 
     [SerializeField] private Plug plugIn;
 
-    public LineRenderer cable;
+    [HideInInspector] public LineRenderer cable;
     
     public void SpawnSymbol()
     {

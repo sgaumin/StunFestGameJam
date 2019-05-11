@@ -56,5 +56,8 @@ public class Message : MonoBehaviour
         sprite.enabled = false;
 
         // Compare Color + Shape with Screen requirement
+        
+        // Destroy object
+        Destroy(gameObject);
     }
 }
