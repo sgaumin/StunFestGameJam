@@ -7,7 +7,7 @@ public class MouseManager : MonoBehaviour
     public static MouseManager Instance;
 
     [SerializeField] private CableController cablePrefab;
-    
+
     private GameObject _currentObjectToDrag;
     private CableController _cable;
     private bool _isDragging;
@@ -18,6 +18,17 @@ public class MouseManager : MonoBehaviour
             Instance = this;
         else
             Destroy(gameObject);
+    }
+
+    private void Update()
+    {
+        if (_currentObjectToDrag != null)
+        {
+            Vector3 dragPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            dragPosition.z = -2f;
+
+            _currentObjectToDrag.transform.position = dragPosition;
+        }
     }
 
     public void StartDraggingFirstHead()
@@ -43,16 +54,5 @@ public class MouseManager : MonoBehaviour
     {
         _isDragging = false;
         _currentObjectToDrag = null;
-    }
-
-    private void Update()
-    {
-        if (_currentObjectToDrag != null)
-        {
-            Vector3 dragPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            dragPosition.z = -0.1f;
-
-            _currentObjectToDrag.transform.position = dragPosition;
-        }
     }
 }

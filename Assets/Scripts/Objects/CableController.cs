@@ -14,18 +14,18 @@ public class CableController : MonoBehaviour
         cable.gameObject.SetActive(false);
     }
 
-    public void ActiveSecondHead()
-    {
-        secondHead.gameObject.SetActive(true);
-        cable.gameObject.SetActive(true);
-        MouseManager.Instance.StartDraggingSecondHead();
-    }
-
     private void Update()
     {
         if (Input.GetMouseButtonDown(1)) // Left click
         {
             Destroy(gameObject);
         }
+    }
+
+    public void ActiveSecondHead()
+    {
+        secondHead.gameObject.SetActive(true);
+        cable.gameObject.SetActive(true);
+        MouseManager.Instance.StartDraggingSecondHead();
     }
 }

@@ -13,3 +13,19 @@ public enum HeadType
     FirstHead,
     SecondHead
 }
+
+[Serializable]
+public enum MessageColors
+{
+    Red,
+    Green,
+    Blue
+}
+
+[Serializable]
+public enum MessageShapes
+{
+    Cube,
+    Circle,
+    Triangle
+}

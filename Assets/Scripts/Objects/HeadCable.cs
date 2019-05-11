@@ -8,6 +8,7 @@ public class HeadCable : MonoBehaviour
     [HideInInspector] public bool isPlug;
 
     private CableController _cableController;
+    private Plug _plug;
 
     private void Awake()
     {
@@ -26,7 +27,6 @@ public class HeadCable : MonoBehaviour
         var plug = other.GetComponent<Plug>();
         if (plug != null)
         {
-            Debug.Log("Cable detected");
             if (Input.GetMouseButtonDown(0))
             {
                 if (!isPlug)
@@ -38,6 +38,7 @@ public class HeadCable : MonoBehaviour
                             ConnectHead(plug.transform.position);
                             plug.isUsed = true;
 
+                            _plug = plug;
                             _cableController.ActiveSecondHead();
                         }
                     }
@@ -47,10 +48,17 @@ public class HeadCable : MonoBehaviour
                         {
                             ConnectHead(plug.transform.position);
                             plug.isUsed = true;
+
+                            _plug = plug;
                         }
                     }
                 }
             }
         }
+    }
+
+    private void OnDestroy()
+    {
+        _plug.isUsed = false;
     }
 }
