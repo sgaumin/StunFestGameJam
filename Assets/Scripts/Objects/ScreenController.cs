@@ -40,12 +40,13 @@ public class ScreenController : MonoBehaviour
     void Update()
     {
         totalTime += Time.deltaTime;
-        if(timerFill.rectTransform.rect.height > 0)
+        if (timerFill.rectTransform.rect.height > 0)
         {
             // resize the timer fill
             float newSize = originalSize * (1 - totalTime * timerSpeed);
             timerFill.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, newSize);
-        } else
+        }
+        else
         {
             Debug.Log("timer over");
             // show the mire when time is over
@@ -53,6 +54,10 @@ public class ScreenController : MonoBehaviour
         }
     }
 
+    public void ResetTimer()
+    {
+        totalTime = 0;
+    }
 
     void CreateCharacter()
     {
@@ -71,7 +76,8 @@ public class ScreenController : MonoBehaviour
             eyesIndex = random.Next(nEyes);
             hatIndex = random.Next(nHat);
 
-            characterFeatures = bodyIndex + "" + earsIndex + "" + headIndex + "" + noseIndex + mouthIndex + eyesIndex + "" + hatIndex;
+            characterFeatures = bodyIndex + "" + earsIndex + "" + headIndex + "" + noseIndex + mouthIndex + eyesIndex +
+                                "" + hatIndex;
             characterIsUnique = true;
 
             foreach (string otherCharacter in existingCharacters)
@@ -83,59 +89,68 @@ public class ScreenController : MonoBehaviour
                 }
             }
         }
+
         existingCharacters.Add(characterFeatures);
 
 
         Image characterBody = transform.Find("ScreenContent/Character_body").GetComponent<Image>();
         Image characterEars = transform.Find("ScreenContent/Character_body/Character_ears").GetComponent<Image>();
         Image characterHead = transform.Find("ScreenContent/Character_body/Character_head").GetComponent<Image>();
-        Image characterNose = transform.Find("ScreenContent/Character_body/Character_head/Character_nose").GetComponent<Image>();
-        Image characterMouth = transform.Find("ScreenContent/Character_body/Character_head/Character_mouth").GetComponent<Image>();
-        Image characterEyes = transform.Find("ScreenContent/Character_body/Character_head/Character_eyes").GetComponent<Image>();
+        Image characterNose = transform.Find("ScreenContent/Character_body/Character_head/Character_nose")
+            .GetComponent<Image>();
+        Image characterMouth = transform.Find("ScreenContent/Character_body/Character_head/Character_mouth")
+            .GetComponent<Image>();
+        Image characterEyes = transform.Find("ScreenContent/Character_body/Character_head/Character_eyes")
+            .GetComponent<Image>();
         Image characterHat = transform.Find("ScreenContent/Character_body/Character_hat").GetComponent<Image>();
 
         // load body
         byte[] bytes = File.ReadAllBytes(Application.dataPath + "/Art/Characters/corps" + bodyIndex + ".png");
         Texture2D bodyTexture = new Texture2D(characterWidth, characterHeight);
         bodyTexture.LoadImage(bytes);
-        characterBody.sprite = Sprite.Create(bodyTexture, new Rect(0, 0, characterWidth, characterHeight), new Vector2(0.5f, 0.0f), 1.0f);
+        characterBody.sprite = Sprite.Create(bodyTexture, new Rect(0, 0, characterWidth, characterHeight),
+            new Vector2(0.5f, 0.0f), 1.0f);
 
         // load ears
         bytes = File.ReadAllBytes(Application.dataPath + "/Art/Characters/oreilles/oreille" + earsIndex + ".png");
         Texture2D earsTexture = new Texture2D(characterWidth, characterHeight);
         earsTexture.LoadImage(bytes);
-        characterEars.sprite = Sprite.Create(earsTexture, new Rect(0, 0, characterWidth, characterHeight), new Vector2(0.5f, 0.0f), 1.0f);
+        characterEars.sprite = Sprite.Create(earsTexture, new Rect(0, 0, characterWidth, characterHeight),
+            new Vector2(0.5f, 0.0f), 1.0f);
 
         // load head
         bytes = File.ReadAllBytes(Application.dataPath + "/Art/Characters/base tete/base_tete" + headIndex + ".png");
         Texture2D headTexture = new Texture2D(characterWidth, characterHeight);
         headTexture.LoadImage(bytes);
-        characterHead.sprite = Sprite.Create(headTexture, new Rect(0, 0, characterWidth, characterHeight), new Vector2(0.5f, 0.0f), 1.0f);
+        characterHead.sprite = Sprite.Create(headTexture, new Rect(0, 0, characterWidth, characterHeight),
+            new Vector2(0.5f, 0.0f), 1.0f);
 
         // load nose
         bytes = File.ReadAllBytes(Application.dataPath + "/Art/Characters/nez/nez" + noseIndex + ".png");
         Texture2D noseTexture = new Texture2D(characterWidth, characterHeight);
         noseTexture.LoadImage(bytes);
-        characterNose.sprite = Sprite.Create(noseTexture, new Rect(0, 0, characterWidth, characterHeight), new Vector2(0.5f, 0.0f), 1.0f);
+        characterNose.sprite = Sprite.Create(noseTexture, new Rect(0, 0, characterWidth, characterHeight),
+            new Vector2(0.5f, 0.0f), 1.0f);
 
         // load mouth
         bytes = File.ReadAllBytes(Application.dataPath + "/Art/Characters/bouches/bouche" + mouthIndex + ".png");
         Texture2D mouthTexture = new Texture2D(characterWidth, characterHeight);
         mouthTexture.LoadImage(bytes);
-        characterMouth.sprite = Sprite.Create(mouthTexture, new Rect(0, 0, characterWidth, characterHeight), new Vector2(0.5f, 0.0f), 1.0f);
+        characterMouth.sprite = Sprite.Create(mouthTexture, new Rect(0, 0, characterWidth, characterHeight),
+            new Vector2(0.5f, 0.0f), 1.0f);
 
         // load eyes
         bytes = File.ReadAllBytes(Application.dataPath + "/Art/Characters/oeil/oeil" + eyesIndex + ".png");
         Texture2D eyesTexture = new Texture2D(characterWidth, characterHeight);
         eyesTexture.LoadImage(bytes);
-        characterEyes.sprite = Sprite.Create(eyesTexture, new Rect(0, 0, characterWidth, characterHeight), new Vector2(0.5f, 0.0f), 1.0f);
+        characterEyes.sprite = Sprite.Create(eyesTexture, new Rect(0, 0, characterWidth, characterHeight),
+            new Vector2(0.5f, 0.0f), 1.0f);
 
         // load hat
         bytes = File.ReadAllBytes(Application.dataPath + "/Art/Characters/tophead/tophead" + hatIndex + ".png");
         Texture2D hatTexture = new Texture2D(characterWidth, characterHeight);
         hatTexture.LoadImage(bytes);
-        characterHat.sprite = Sprite.Create(hatTexture, new Rect(0, 0, characterWidth, characterHeight), new Vector2(0.5f, 0.0f), 1.0f);
-
+        characterHat.sprite = Sprite.Create(hatTexture, new Rect(0, 0, characterWidth, characterHeight),
+            new Vector2(0.5f, 0.0f), 1.0f);
     }
-
 }

@@ -15,11 +15,14 @@ public class Screen : MonoBehaviour
 
     [HideInInspector] public CableController cableController;
 
+    private ScreenController _screen;    
     private Message _messageDemand;
     private Message _message;
 
     private void Start()
     {
+        _screen = GetComponent<ScreenController>();
+        
         GenerateMessage();
         GenerateDemand();
     }
@@ -70,6 +73,7 @@ public class Screen : MonoBehaviour
             (receivedMessage.messageShape == _messageDemand.messageShape))
         {
             // WIN
+            _screen.ResetTimer();
             Debug.Log("Receive good message");
         }
         else
