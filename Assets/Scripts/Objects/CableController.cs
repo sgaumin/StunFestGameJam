@@ -9,7 +9,7 @@ public class CableController : MonoBehaviour
     public Screen screen;
     public bool isConnected;
 
-    [SerializeField] private GameObject cable;
+    public GameObject cable;
 
     private void Awake()
     {

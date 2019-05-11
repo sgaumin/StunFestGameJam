@@ -36,6 +36,7 @@ public class HeadCable : MonoBehaviour
                         {
                             ConnectHead(plug.transform.position);
                             plug.isUsed = true;
+                            plug.cableController = _cableController;
 
                             this.plug = plug;
                             _cableController.screen = this.plug.GetComponentInParent<Screen>();
@@ -48,6 +49,7 @@ public class HeadCable : MonoBehaviour
                         {
                             ConnectHead(plug.transform.position);
                             plug.isUsed = true;
+                            plug.cableController = _cableController;
 
                             this.plug = plug;
                             _cableController.ActiveConnection();

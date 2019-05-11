@@ -5,6 +5,8 @@ public class MessageChanger : MonoBehaviour
 {
     public MessageChangerType messageChangerType;
 
+    [SerializeField] private Plug plugIn;
+
     public void ChangeMessage(Message message)
     {
         switch (messageChangerType)
@@ -45,6 +47,22 @@ public class MessageChanger : MonoBehaviour
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
+        }
+
+
+        // if cable connected to Out Plug, transform to plug
+        if (plugIn.isUsed)
+        {
+            var position = plugIn.transform.position;
+            position.z = -8f;
+            message.transform.position = position;
+
+            // Update Message
+            message.InitMessage();
+
+            // Follow cable
+            message.cableController = plugIn.cableController;
+            message.FollowCable();
         }
     }
 }

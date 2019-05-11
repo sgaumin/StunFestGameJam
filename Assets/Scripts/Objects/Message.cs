@@ -4,10 +4,16 @@ using System.Collections;
 
 public class Message : MonoBehaviour
 {
+#pragma warning disable 0649 
+
     public MessageColors messageColor;
     public MessageShapes messageShape;
 
     [HideInInspector] public CableController cableController;
+
+    [Space] [SerializeField] private Sprite triangle;
+    [SerializeField] private Sprite cube;
+    [SerializeField] private Sprite circle;
 
     private SpriteRenderer _sprite;
     private LineRenderer _cable;
@@ -15,7 +21,43 @@ public class Message : MonoBehaviour
     private void Start()
     {
         _sprite = GetComponent<SpriteRenderer>();
-        _cable = GetComponent<LineRenderer>();
+
+        InitMessage();
+    }
+
+    public void InitMessage()
+    {
+        _sprite.enabled = true;
+        
+        switch (messageColor)
+        {
+            case MessageColors.Red:
+                _sprite.color = Color.red;
+                break;
+            case MessageColors.Green:
+                _sprite.color = Color.green;
+                break;
+            case MessageColors.Blue:
+                _sprite.color = Color.blue;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+
+        switch (messageShape)
+        {
+            case MessageShapes.Cube:
+                _sprite.sprite = cube;
+                break;
+            case MessageShapes.Circle:
+                _sprite.sprite = circle;
+                break;
+            case MessageShapes.Triangle:
+                _sprite.sprite = triangle;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
     }
 
     public void FollowCable()
@@ -25,7 +67,9 @@ public class Message : MonoBehaviour
 
     private IEnumerator GoToNextPosition(float time)
     {
-        for (int i = 0; i < _cable.positionCount; i++)
+        _cable = cableController.cable.GetComponent<LineRenderer>();
+
+        for (int i = 1; i < _cable.positionCount; i++)
         {
             float elapsedTime = 0;
             Vector3 startingPos = transform.position;
@@ -33,7 +77,10 @@ public class Message : MonoBehaviour
             {
                 if (_cable != null)
                 {
-                    transform.position = Vector3.Lerp(startingPos, _cable.GetPosition(i), (elapsedTime / time));
+                    var tempPos = _cable.GetPosition(i);
+                    tempPos.z = startingPos.z;
+
+                    transform.position = Vector3.Lerp(startingPos, tempPos, (elapsedTime / time));
                     elapsedTime += Time.deltaTime;
                     yield return null;
                 }
@@ -58,13 +105,15 @@ public class Message : MonoBehaviour
         if (cableController.secondHead.plug.plugRole == PlugRole.Changer)
         {
             // Change to new Message
+            var changer = cableController.secondHead.plug.GetComponentInParent<MessageChanger>();
+            changer.ChangeMessage(this);
         }
         else if (cableController.secondHead.plug.plugRole == PlugRole.Screen)
         {
             // Compare Color + Shape with Screen requirement
-        }
 
-        // Destroy object
-        Destroy(gameObject);
+            // Destroy object
+            Destroy(gameObject);
+        }
     }
 }

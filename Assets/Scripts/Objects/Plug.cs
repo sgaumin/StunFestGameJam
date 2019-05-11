@@ -6,4 +6,5 @@ public class Plug : MonoBehaviour
     public PlugRole plugRole;
 
     [HideInInspector] public bool isUsed;
+    [HideInInspector] public CableController cableController;
 }
