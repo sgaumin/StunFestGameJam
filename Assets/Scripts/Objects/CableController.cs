@@ -70,6 +70,7 @@ public class CableController : MonoBehaviour
             return firstHead;
         } else
         {
+            return secondHead;
         }
     }
 
