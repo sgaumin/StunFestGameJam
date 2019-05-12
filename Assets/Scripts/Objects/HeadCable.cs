@@ -10,6 +10,8 @@ public class HeadCable : MonoBehaviour
     [HideInInspector] public bool isPlug;
     [HideInInspector] public Plug plug;
 
+    public Sprite cableEnd;
+
     [SerializeField] private AudioClip[] plugSounds;
     [SerializeField] private AudioClip unplugSound;
 
@@ -25,6 +27,13 @@ public class HeadCable : MonoBehaviour
     private void ConnectHead(Vector3 plugPos)
     {
         PlayPlugSound();
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = cableEnd;
+        spriteRenderer.sortingOrder = 1;
+        transform.localScale = new Vector3(1, 1, 1);
+        //var position = transform.position;
+        //position.z = -5;
+        //transform.position = position;
         isPlug = true;
         transform.position = plugPos;
         MouseManager.Instance.EndDragging();
