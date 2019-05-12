@@ -7,13 +7,17 @@ public class GameSystem : MonoBehaviour
 {
     public static GameSystem Instance;
 
+    public GameStates gameState = GameStates.Play;
+
     private Screen[] _screens;
     private List<Screen> _screensDisplay = new List<Screen>();
     private int _nbPhase;
 
     [HideInInspector] public int messageReceived;
+    [HideInInspector] public int screenMire;
     [SerializeField] private float minTime = 2f;
     [SerializeField] private float maxTime = 5f;
+    [SerializeField] private int limitScreenMire = 4;
 
     private void Awake()
     {
@@ -47,17 +51,26 @@ public class GameSystem : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(messageReceived + "/" + _nbPhase);
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-            LevelManager.Instance.LoadMenu();
-
-        if (messageReceived == _nbPhase)
+        if (gameState == GameStates.Play)
         {
-            Debug.Log("End Phase");
-            messageReceived = 0;
-            _nbPhase++;
-            StartCoroutine(GenerateWave());
+            if (screenMire == limitScreenMire)
+            {
+                // Game Over
+                GameOver();
+            }
+
+            Debug.Log(messageReceived + "/" + _nbPhase);
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+                LevelManager.Instance.LoadMenu();
+
+            if (messageReceived == _nbPhase)
+            {
+                Debug.Log("End Phase");
+                messageReceived = 0;
+                _nbPhase++;
+                StartCoroutine(GenerateWave());
+            }
         }
     }
 
@@ -73,6 +86,7 @@ public class GameSystem : MonoBehaviour
             // Verify if Screens already spawns a message
             InitScreenArray();
             numbInteraction = Mathf.Min(_nbPhase, _screensDisplay.Count);
+            Debug.Log("Interactions: " + numbInteraction);
 
             int rand = Random.Range(0, _screensDisplay.Count);
 
@@ -82,5 +96,16 @@ public class GameSystem : MonoBehaviour
             // Spawn message
             _screens[rand].GenerateDemand();
         }
+    }
+
+    private void GameOver()
+    {
+        Debug.Log("Game Over");
+        
+        // Update Game State
+        gameState = GameStates.GameOver;
+
+        // Show GameOver Screen
+
     }
 }

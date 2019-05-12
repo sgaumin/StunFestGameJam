@@ -2,6 +2,13 @@
 using UnityEngine;
 
 [Serializable]
+public enum GameStates
+{
+    Play,
+    GameOver,
+}
+
+[Serializable]
 public enum PlugType
 {
     In,
