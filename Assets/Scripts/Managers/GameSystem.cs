@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -14,11 +15,12 @@ public class GameSystem : MonoBehaviour
     [SerializeField] private float minTime = 2f;
     [SerializeField] private float maxTime = 5f;
     [SerializeField] private int limitScreenMire = 4;
-    
+
     private Screen[] _screens;
-    private List<Screen> _screensDisplay = new List<Screen>();
+    public List<Screen> screensDisplay = new List<Screen>();
     private int _nbPhase;
     private float _timeScore;
+    private int _numbInteraction;
 
     private void Awake()
     {
@@ -30,24 +32,13 @@ public class GameSystem : MonoBehaviour
 
     private void Start()
     {
-        _nbPhase = 1;
         _screens = FindObjectsOfType<Screen>();
+        screensDisplay = FindObjectsOfType<Screen>().ToList();
 
-        InitScreenArray();
+        _nbPhase = 1;
+        _numbInteraction = 1;
 
         StartCoroutine(GenerateWave());
-    }
-
-    private void InitScreenArray()
-    {
-        _screensDisplay.Clear();
-        foreach (var screen in _screens)
-        {
-            if (screen.screenState == ScreenStates.Display)
-            {
-                _screensDisplay.Add(screen);
-            }
-        }
     }
 
     private void Update()
@@ -60,19 +51,19 @@ public class GameSystem : MonoBehaviour
                 GameOver();
             }
 
-            Debug.Log(messageReceived + "/" + _nbPhase);
+//            Debug.Log(messageReceived + "/" + _nbPhase);
 
             if (Input.GetKeyDown(KeyCode.Escape))
                 LevelManager.Instance.LoadMenu();
 
-            if (messageReceived == _nbPhase)
+            if (messageReceived == _numbInteraction)
             {
                 Debug.Log("End Phase");
                 messageReceived = 0;
                 _nbPhase++;
                 StartCoroutine(GenerateWave());
             }
-            
+
             // Update Time Score
             _timeScore += Time.deltaTime;
         }
@@ -80,38 +71,56 @@ public class GameSystem : MonoBehaviour
 
     private IEnumerator GenerateWave()
     {
-        InitScreenArray();
-        int numbInteraction = Mathf.Min(_nbPhase, _screensDisplay.Count);
+        Debug.Log("Generate");
 
-        for (int i = 0; i < numbInteraction; i++)
+        yield return new WaitForSeconds(2f);
+
+        _numbInteraction = Mathf.Min(_nbPhase, screensDisplay.Count);
+
+        List<int> randAlreadyCreate = new List<int>();
+
+        for (int i = 0; i < _numbInteraction; i++)
         {
             yield return new WaitForSeconds(Random.Range(minTime, maxTime));
 
-            // Verify if Screens already spawns a message
-//            InitScreenArray();
-//            numbInteraction = Mathf.Min(_nbPhase, _screensDisplay.Count);
+            int rand = 0;
+            bool check = false;
+            while (!check)
+            {
+                rand = Random.Range(0, screensDisplay.Count);
+                Debug.Log("Houba" + rand);
 
-            int rand = Random.Range(0, _screensDisplay.Count);
+                if (!randAlreadyCreate.Contains(rand))
+                {
+                    if (screensDisplay[rand].screenState == ScreenStates.Display)
+                    {
+                        Debug.Log(screensDisplay[rand].screenState);
 
-            Debug.Log("Houba");
-            
-            while (_screensDisplay[rand].demandGenerated || _screensDisplay[rand].screenState == ScreenStates.Mire)
-                rand = Random.Range(0, _screensDisplay.Count);
+                        if (!screensDisplay[rand].demandGenerated)
+                        {
+                            check = true;
+                        }
+                    }
+                }
+            }
+
+            randAlreadyCreate.Add(rand);
 
             // Spawn message
             Debug.Log(_screens[rand].gameObject.name);
             _screens[rand].GenerateDemand();
+
+            yield return null;
         }
     }
 
     private void GameOver()
     {
         Debug.Log("Game Over");
-        
+
         // Update Game State
         gameState = GameStates.GameOver;
 
         // Show GameOver Screen
-
     }
 }
