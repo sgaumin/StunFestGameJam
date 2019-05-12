@@ -107,8 +107,7 @@ public class GameSystem : MonoBehaviour
             randAlreadyCreate.Add(rand);
 
             // Spawn message
-            Debug.Log(_screens[rand].gameObject.name);
-            _screens[rand].GenerateDemand();
+            screensDisplay[rand].GenerateDemand();
 
             yield return null;
         }
