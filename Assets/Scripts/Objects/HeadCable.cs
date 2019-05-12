@@ -4,7 +4,7 @@ using UnityEngine;
 public class HeadCable : MonoBehaviour
 {
 #pragma warning disable 0649 
-    
+
     public HeadType headType;
 
     [HideInInspector] public bool isPlug;
@@ -13,7 +13,7 @@ public class HeadCable : MonoBehaviour
     public Sprite cableEnd;
 
     [SerializeField] private ParticleSystem sparkPrefab;
-    
+
     private CableController _cableController;
 
     private void Awake()
@@ -30,12 +30,15 @@ public class HeadCable : MonoBehaviour
         isPlug = true;
         CircleCollider2D collider = GetComponent<CircleCollider2D>();
         collider.offset = new Vector2(0, 0);
+
+        var newPos = plugPos;
+        newPos.z = transform.position.z;
         transform.position = plugPos;
-        
+
         // Spawn Particle
         var particulePos = plugPos + Vector3.back * 50f;
         SpawnParticule(particulePos);
-        
+
         MouseManager.Instance.EndDragging();
     }
 
@@ -50,7 +53,7 @@ public class HeadCable : MonoBehaviour
                 {
                     if (!plug.isUsed)
                     {
-                        if((plug.plugType == PlugType.In) && !_cableController.firstHeadPlugged)
+                        if ((plug.plugType == PlugType.In) && !_cableController.firstHeadPlugged)
                         {
                             this.plug = plug;
                             ConnectHead(plug.transform.position);
@@ -60,7 +63,7 @@ public class HeadCable : MonoBehaviour
                             headType = HeadType.FirstHead;
                             _cableController.screen = this.plug.GetComponentInParent<Screen>();
 
-                            if (! (_cableController.firstHeadPlugged && _cableController.secondHeadPlugged))
+                            if (!(_cableController.firstHeadPlugged && _cableController.secondHeadPlugged))
                             {
                                 _cableController.ActiveSecondHead();
                             }
@@ -69,9 +72,8 @@ public class HeadCable : MonoBehaviour
                                 _cableController.firstPluggedHead = HeadType.SecondHead;
                                 _cableController.ActiveConnection();
                             }
-
                         }
-                        else if(plug.plugType == PlugType.Out && !_cableController.secondHeadPlugged)
+                        else if (plug.plugType == PlugType.Out && !_cableController.secondHeadPlugged)
                         {
                             this.plug = plug;
 
@@ -90,10 +92,8 @@ public class HeadCable : MonoBehaviour
                                 _cableController.firstPluggedHead = HeadType.FirstHead;
                                 _cableController.ActiveConnection();
                             }
-
                         }
                     }
-
                 }
             }
         }
@@ -106,14 +106,13 @@ public class HeadCable : MonoBehaviour
 
     private void Deconect()
     {
-
         if (_cableController.isConnected)
         {
             plug.SetActive();
             _cableController.isConnected = false;
 
             PlayUnplugSound();
-            
+
             Destroy(_cableController.gameObject);
             if (_cableController != null)
                 if (_cableController.screen != null)
@@ -129,8 +128,8 @@ public class HeadCable : MonoBehaviour
     private void PlayUnplugSound()
     {
         AudioManager.Instance.PlayUnplugSound();
-
     }
+
     private void OnDestroy()
     {
         if (plug != null)
@@ -140,6 +139,6 @@ public class HeadCable : MonoBehaviour
     private void SpawnParticule(Vector3 position)
     {
         var tempParticule = Instantiate(sparkPrefab, position, Quaternion.identity);
-        Destroy(tempParticule,5f);
+        Destroy(tempParticule, 5f);
     }
 }
