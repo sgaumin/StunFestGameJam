@@ -29,12 +29,9 @@ public class HeadCable : MonoBehaviour
         PlayPlugSound();
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = cableEnd;
-        spriteRenderer.sortingOrder = 1;
-        transform.localScale = new Vector3(1, 1, 1);
-        //var position = transform.position;
-        //position.z = -5;
-        //transform.position = position;
         isPlug = true;
+        CircleCollider2D collider = GetComponent<CircleCollider2D>();
+        collider.offset = new Vector2(0, 0);
         transform.position = plugPos;
         MouseManager.Instance.EndDragging();
     }
