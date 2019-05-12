@@ -15,6 +15,8 @@ public class HeadCable : MonoBehaviour
     [SerializeField] private AudioClip[] plugSounds;
     [SerializeField] private AudioClip unplugSound;
 
+    [SerializeField] private ParticleSystem sparkPrefab;
+    
     private AudioSource _audioSource;
     private CableController _cableController;
 
@@ -33,6 +35,11 @@ public class HeadCable : MonoBehaviour
         CircleCollider2D collider = GetComponent<CircleCollider2D>();
         collider.offset = new Vector2(0, 0);
         transform.position = plugPos;
+        
+        // Spawn Particle
+        var particulePos = plugPos + Vector3.back * 50f;
+        SpawnParticule(particulePos);
+        
         MouseManager.Instance.EndDragging();
     }
 
@@ -128,5 +135,11 @@ public class HeadCable : MonoBehaviour
     {
         if (plug != null)
             plug.isUsed = false;
+    }
+
+    private void SpawnParticule(Vector3 position)
+    {
+        var tempParticule = Instantiate(sparkPrefab, position, Quaternion.identity);
+        Destroy(tempParticule,5f);
     }
 }

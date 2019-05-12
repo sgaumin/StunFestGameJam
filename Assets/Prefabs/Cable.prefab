@@ -142,6 +142,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f528ffae06781f64fa0edfff71d57ecb, type: 3}
   - {fileID: 8300000, guid: f9b21dde95a41364ebbf7366ee2ab3bb, type: 3}
   unplugSound: {fileID: 8300000, guid: 8b3312b9fc6ec2c46b9222b29cefaad5, type: 3}
+  sparkPrefab: {fileID: 198887356561477810, guid: bad4a586d8c2b4fc1adb20c80b9b13a1,
+    type: 3}
 --- !u!82 &1101083628047787819
 AudioSource:
   m_ObjectHideFlags: 0
@@ -654,6 +656,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f528ffae06781f64fa0edfff71d57ecb, type: 3}
   - {fileID: 8300000, guid: f9b21dde95a41364ebbf7366ee2ab3bb, type: 3}
   unplugSound: {fileID: 8300000, guid: 8b3312b9fc6ec2c46b9222b29cefaad5, type: 3}
+  sparkPrefab: {fileID: 198887356561477810, guid: bad4a586d8c2b4fc1adb20c80b9b13a1,
+    type: 3}
 --- !u!82 &1071170826775697710
 AudioSource:
   m_ObjectHideFlags: 0
