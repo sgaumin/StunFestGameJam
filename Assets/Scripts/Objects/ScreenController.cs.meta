@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 751057c78aa45114c87d1385ebf480f7
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - blueBackground: {fileID: 21300000, guid: f308b908921eb8c43bb682229e59a999, type: 3}
+  - greenBackground: {instanceID: 0}
+  - redBackground: {instanceID: 0}
+  - timerFill: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
