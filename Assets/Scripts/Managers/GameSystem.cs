@@ -16,11 +16,13 @@ public class GameSystem : MonoBehaviour
     [SerializeField] private float maxTime = 5f;
     [SerializeField] private int limitScreenMire = 4;
 
-    private Screen[] _screens;
     [HideInInspector] public List<Screen> screensDisplay = new List<Screen>();
     private int _nbPhase;
     private float _timeScore;
     private int _numbInteraction;
+
+    [SerializeField] private SpriteRenderer spriteRendererHeart;
+    [SerializeField] private Sprite[] spriteHearts;
 
     private void Awake()
     {
@@ -32,7 +34,6 @@ public class GameSystem : MonoBehaviour
 
     private void Start()
     {
-        _screens = FindObjectsOfType<Screen>();
         screensDisplay = FindObjectsOfType<Screen>().ToList();
 
         _nbPhase = 1;
@@ -118,12 +119,21 @@ public class GameSystem : MonoBehaviour
         // Update Game State
         gameState = GameStates.GameOver;
         Debug.Log("Game Over");
-        
+
         yield return new WaitForSeconds(3f);
-        
+
         // Show GameOver Screen
-        
+
         // Load Menu
         LevelManager.Instance.LoadMenu();
+    }
+
+    public void UpdateLife()
+    {
+        screenMire++;
+        if (screenMire < limitScreenMire)
+            spriteRendererHeart.sprite = spriteHearts[screenMire];
+        else if (screenMire == limitScreenMire)
+            spriteRendererHeart.sprite = null;
     }
 }

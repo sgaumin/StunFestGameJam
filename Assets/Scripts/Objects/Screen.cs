@@ -134,7 +134,7 @@ public class Screen : MonoBehaviour
     {
         // Update Status
         screenState = ScreenStates.Mire;
-        GameSystem.Instance.screenMire++;
+        GameSystem.Instance.UpdateLife();
 
         GameSystem.Instance.screensDisplay.Remove(this);
         
