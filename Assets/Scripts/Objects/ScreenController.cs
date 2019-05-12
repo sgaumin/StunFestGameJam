@@ -23,6 +23,10 @@ public class ScreenController : MonoBehaviour
     [SerializeField] private Sprite[] eyes;
     [SerializeField] private Sprite[] hats;
 
+    [SerializeField] private Sprite blueBackground;
+    [SerializeField] private Sprite greenBackground;
+    [SerializeField] private Sprite redBackground;
+
     public static int characterHeight = 241;
     public static int characterWidth = 213;
 
@@ -74,33 +78,21 @@ public class ScreenController : MonoBehaviour
 
     public void SetBackground(MessageColors color)
     {
-        string backgroundFileName = "/Art/ScreenElements/fond ecran ";
+        Image background = transform.Find("ScreenContent").GetComponent<Image>();
         switch (color)
         {
             case MessageColors.Red:
-                backgroundFileName += "rouge";
+                background.sprite = redBackground;
                 break;
             case MessageColors.Green:
-                backgroundFileName += "vert";
+                background.sprite = greenBackground;
                 break;
             case MessageColors.Blue:
-                backgroundFileName += "bleu";
+                background.sprite = blueBackground;
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
         }
-
-        backgroundFileName += ".png";
-
-        int backgroundWidth = 416;
-        int backgroundHeight = 286;
-
-        Image background = transform.Find("ScreenContent").GetComponent<Image>();
-        byte[] bytes = File.ReadAllBytes(Application.dataPath + backgroundFileName);
-        Texture2D backgroundTexture = new Texture2D(backgroundWidth, backgroundHeight);
-        backgroundTexture.LoadImage(bytes);
-        background.sprite = Sprite.Create(backgroundTexture, new Rect(0, 0, backgroundWidth, backgroundHeight),
-            new Vector2(0.5f, 0.0f), 1.0f);
     }
 
     public void ResetTimer()

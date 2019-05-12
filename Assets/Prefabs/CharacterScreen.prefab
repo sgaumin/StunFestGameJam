@@ -212,7 +212,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.073606245, y: 0.6253578}
   m_AnchorMax: {x: 0.30519688, y: 0.86464226}
-  m_AnchoredPosition: {x: -0.609375, y: -0.3527527}
+  m_AnchoredPosition: {x: -0.6094055, y: -0.3527527}
   m_SizeDelta: {x: 0.097854614, y: -0.11331177}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7252698394887376818
@@ -1064,7 +1064,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: bc5cca9ef27014942adcc97dcc99851f, type: 3}
   - {fileID: 21300000, guid: d05628f678e84634dbf6440c0434367f, type: 3}
   - {fileID: 21300000, guid: dd63d6405d3320a4eb9458ef8cea3ff2, type: 3}
-  timerTime: 100
+  blueBackground: {fileID: 21300000, guid: f308b908921eb8c43bb682229e59a999, type: 3}
+  greenBackground: {fileID: 21300000, guid: b9caaf1a95f021447898b3e00323d92d, type: 3}
+  redBackground: {fileID: 21300000, guid: a2407e240c40b7848858ab7a5ba8bd45, type: 3}
+  timerTime: 35
   timerFill: {fileID: 5150698631726000988}
 --- !u!114 &4834329565587165810
 MonoBehaviour:
