@@ -35,6 +35,7 @@ public class GameSystem : MonoBehaviour
 
     private void InitScreenArray()
     {
+        _screensDisplay.Clear();
         foreach (var screen in _screens)
         {
             if (screen.screenState == ScreenStates.Display)
@@ -46,13 +47,14 @@ public class GameSystem : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log(messageReceived + "/" + _nbPhase);
+
         if (Input.GetKeyDown(KeyCode.Escape))
-        {
             LevelManager.Instance.LoadMenu();
-        }
 
         if (messageReceived == _nbPhase)
         {
+            Debug.Log("End Phase");
             messageReceived = 0;
             _nbPhase++;
             StartCoroutine(GenerateWave());
@@ -62,17 +64,20 @@ public class GameSystem : MonoBehaviour
     private IEnumerator GenerateWave()
     {
         InitScreenArray();
+        int numbInteraction = Mathf.Min(_nbPhase, _screensDisplay.Count);
 
-        int nubIteraction = Mathf.Min(_nbPhase, _screensDisplay.Count);
-        
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < numbInteraction; i++)
         {
             yield return new WaitForSeconds(Random.Range(minTime, maxTime));
 
             // Verify if Screens already spawns a message
-            int rand = Random.Range(0, _screens.Length);
-//            while (_screensDisplay[rand].demandGenerated)
-//                rand = Random.Range(0, _screens.Length);
+            InitScreenArray();
+            numbInteraction = Mathf.Min(_nbPhase, _screensDisplay.Count);
+
+            int rand = Random.Range(0, _screensDisplay.Count);
+
+            while (_screensDisplay[rand].demandGenerated)
+                rand = Random.Range(0, _screensDisplay.Count);
 
             // Spawn message
             _screens[rand].GenerateDemand();

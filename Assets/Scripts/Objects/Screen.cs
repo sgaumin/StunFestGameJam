@@ -96,27 +96,30 @@ public class Screen : MonoBehaviour
 
     public void CompareMessage(Message receivedMessage)
     {
-        if (_messageDemand != null)
+        if (screenState == ScreenStates.Display)
         {
-            _screen.HideBubble();
-            if ((receivedMessage.messageColor == _messageDemand.messageColor) &&
-                (receivedMessage.messageShape == _messageDemand.messageShape))
+            if (_messageDemand != null)
             {
-                // Win
-                _screen.ResetTimer();
-                _messageDemand = null;
-                demandGenerated = false;
-                GameSystem.Instance.messageReceived++;
+                _screen.HideBubble();
+                if ((receivedMessage.messageColor == _messageDemand.messageColor) &&
+                    (receivedMessage.messageShape == _messageDemand.messageShape))
+                {
+                    // Win
+                    _screen.ResetTimer();
+                    _messageDemand = null;
+                    demandGenerated = false;
+                    GameSystem.Instance.messageReceived++;
+                }
+                else
+                {
+                    // Loose
+                    ScreenOver();
+                }
             }
             else
             {
-                // Loose
                 ScreenOver();
             }
-        }
-        else
-        {
-            ScreenOver();
         }
     }
 
@@ -130,11 +133,12 @@ public class Screen : MonoBehaviour
 
         // Stop Timer
 
-        // Update Status
-        screenState = ScreenStates.Mire;
 
         // if demand message was created
-        if (demandGenerated != null)
+        if (demandGenerated)
             GameSystem.Instance.messageReceived++;
+
+        // Update Status
+        screenState = ScreenStates.Mire;
     }
 }
