@@ -701,7 +701,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ba43d6c390b524942bc41008385afde9, type: 3}
-  m_Color: {r: 1, g: 0.899874, b: 0, a: 1}
+  m_Color: {r: 0.6509434, g: 0.4026906, b: 0.29169634, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1027,6 +1027,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 751057c78aa45114c87d1385ebf480f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bodies:
+  - {fileID: 21300000, guid: 0d176f37da67ec24a851a4422d29be1e, type: 3}
+  heads:
+  - {fileID: 21300000, guid: 6cd80bff78bd098469397e4b704b9db3, type: 3}
+  - {fileID: 21300000, guid: 1d40d28c925ab5f4596ccc2b1d3f5484, type: 3}
+  - {fileID: 21300000, guid: e0a671b51196b2f48a7dad05fbafcaeb, type: 3}
+  - {fileID: 21300000, guid: 14aef770f18dd1645a67b062e29d7827, type: 3}
+  - {fileID: 21300000, guid: 3875d917af51eba4780398537a6239fb, type: 3}
+  ears:
+  - {fileID: 21300000, guid: c70a08aa20889f541a97c29ebfac3900, type: 3}
+  - {fileID: 21300000, guid: 770c59f3027fe1d4d9d63f1289fee402, type: 3}
+  - {fileID: 21300000, guid: 5b5a24d4dfefc3d42b1b488896490e70, type: 3}
+  noses:
+  - {fileID: 21300000, guid: be9d79d1528421a4f8eb58b66142990f, type: 3}
+  - {fileID: 21300000, guid: fcbdc3aacdc439d45a0078d598ed0b2e, type: 3}
+  - {fileID: 21300000, guid: 489534f67caaa8142b641ad3f49d337d, type: 3}
+  - {fileID: 21300000, guid: e05e7344d290c5d4cb1718f4ff36b550, type: 3}
+  - {fileID: 21300000, guid: a3eebeb712b005b4ba40376318c3ab10, type: 3}
+  - {fileID: 21300000, guid: 608df71edf8c7974885a031006aca1ef, type: 3}
+  - {fileID: 21300000, guid: f75c7900ebf3e3842824ab58879b63d4, type: 3}
+  mouths:
+  - {fileID: 21300000, guid: 601c841f3b5872e42a62a0ff0b0154ed, type: 3}
+  - {fileID: 21300000, guid: 58a435a17a7c11b48b9350913b5245f7, type: 3}
+  - {fileID: 21300000, guid: 4b8e28c773409c3488d3f3f3d0a63fcb, type: 3}
+  - {fileID: 21300000, guid: 95fcb7e9c2eff444481277086762b283, type: 3}
+  eyes:
+  - {fileID: 21300000, guid: 574b83d22bf607847ae4aef8d3e4d4eb, type: 3}
+  - {fileID: 21300000, guid: 4daf4e84c2fff55478fbb4b0a8e81138, type: 3}
+  - {fileID: 21300000, guid: ac36cf0c6c2d53940a9b68c25e133533, type: 3}
+  - {fileID: 21300000, guid: f0a996feb857fe14d9542baddcf7c668, type: 3}
+  - {fileID: 21300000, guid: 1da855105903d4f499657d5ef048b172, type: 3}
+  - {fileID: 21300000, guid: 17dea76de244ea34aab0e22e832567b2, type: 3}
+  hats:
+  - {fileID: 21300000, guid: 53fc72d74e9df724391aaab72a8c8d93, type: 3}
+  - {fileID: 21300000, guid: bc5cca9ef27014942adcc97dcc99851f, type: 3}
+  - {fileID: 21300000, guid: d05628f678e84634dbf6440c0434367f, type: 3}
+  - {fileID: 21300000, guid: dd63d6405d3320a4eb9458ef8cea3ff2, type: 3}
   timerTime: 100
   timerFill: {fileID: 5150698631726000988}
 --- !u!114 &4834329565587165810

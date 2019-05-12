@@ -12,23 +12,19 @@ public class HeadCable : MonoBehaviour
 
     public Sprite cableEnd;
 
-    [SerializeField] private AudioClip[] plugSounds;
-    [SerializeField] private AudioClip unplugSound;
-
     [SerializeField] private ParticleSystem sparkPrefab;
     
-    private AudioSource _audioSource;
     private CableController _cableController;
 
     private void Awake()
     {
         _cableController = GetComponentInParent<CableController>();
-        _audioSource = GetComponent<AudioSource>();
     }
 
     private void ConnectHead(Vector3 plugPos)
     {
         PlayPlugSound();
+        plug.SetInactive();
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = cableEnd;
         isPlug = true;
@@ -56,12 +52,12 @@ public class HeadCable : MonoBehaviour
                     {
                         if((plug.plugType == PlugType.In) && !_cableController.firstHeadPlugged)
                         {
+                            this.plug = plug;
                             ConnectHead(plug.transform.position);
                             plug.isUsed = true;
                             plug.cableController = _cableController;
                             _cableController.firstHeadPlugged = true;
                             headType = HeadType.FirstHead;
-                            this.plug = plug;
                             _cableController.screen = this.plug.GetComponentInParent<Screen>();
 
                             if (! (_cableController.firstHeadPlugged && _cableController.secondHeadPlugged))
@@ -77,13 +73,14 @@ public class HeadCable : MonoBehaviour
                         }
                         else if(plug.plugType == PlugType.Out && !_cableController.secondHeadPlugged)
                         {
+                            this.plug = plug;
+
                             ConnectHead(plug.transform.position);
                             plug.isUsed = true;
                             plug.cableController = _cableController;
                             _cableController.secondHeadPlugged = true;
                             headType = HeadType.SecondHead;
 
-                            this.plug = plug;
                             if (!(_cableController.firstHeadPlugged && _cableController.secondHeadPlugged))
                             {
                                 _cableController.ActiveSecondHead();
@@ -104,19 +101,18 @@ public class HeadCable : MonoBehaviour
 
     private void OnMouseDown()
     {
-        StartCoroutine(Deconect());
+        Deconect();
     }
 
-    private IEnumerator Deconect()
+    private void Deconect()
     {
+
         if (_cableController.isConnected)
         {
+            plug.SetActive();
             _cableController.isConnected = false;
-            
-            _audioSource.clip = unplugSound;
-            _audioSource.Play();
-            
-            yield return new WaitForSeconds(unplugSound.length);
+
+            PlayUnplugSound();
             
             Destroy(_cableController.gameObject);
             if (_cableController != null)
@@ -127,10 +123,14 @@ public class HeadCable : MonoBehaviour
 
     private void PlayPlugSound()
     {
-        _audioSource.clip = plugSounds[Random.Range(0, plugSounds.Length)];
-        _audioSource.Play();
+        AudioManager.Instance.PlayPlugSound();
     }
 
+    private void PlayUnplugSound()
+    {
+        AudioManager.Instance.PlayUnplugSound();
+
+    }
     private void OnDestroy()
     {
         if (plug != null)
