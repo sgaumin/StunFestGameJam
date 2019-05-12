@@ -121,13 +121,22 @@ public class Message : MonoBehaviour
             
             for (int i = 1; i < lenght; i++)
             {
+                int indice;
+
+                if (cableController.firstPluggedHead == HeadType.FirstHead)
+                {
+                    indice = i;
+                } else
+                {
+                    indice = lenght - i;
+                }
                 float elapsedTime = 0;
                 Vector3 startingPos = transform.position;
                 while (elapsedTime < time)
                 {
                     if (_cable != null)
                     {
-                        var tempPos = _cable.GetPosition(i);
+                        var tempPos = _cable.GetPosition(indice);
                         tempPos.z = startingPos.z;
 
                         transform.position = Vector3.Lerp(startingPos, tempPos, (elapsedTime / time));
@@ -158,16 +167,16 @@ public class Message : MonoBehaviour
         // Hide message
         _sprite.enabled = false;
 
-        if (cableController.secondHead.plug.plugRole == PlugRole.Changer)
+        if (cableController.GetOutHead().plug.plugRole == PlugRole.Changer)
         {
             // Change to new Message
-            var changer = cableController.secondHead.plug.GetComponentInParent<MessageChanger>();
+            var changer = cableController.GetOutHead().plug.GetComponentInParent<MessageChanger>();
             changer.ChangeMessage(this);
         }
-        else if (cableController.secondHead.plug.plugRole == PlugRole.Screen)
+        else if (cableController.GetOutHead().plug.plugRole == PlugRole.Screen)
         {
             // Compare Color + Shape with Screen requirement
-            var screen = cableController.secondHead.plug.GetComponentInParent<Screen>();
+            var screen = cableController.GetOutHead().plug.GetComponentInParent<Screen>();
             screen.CompareMessage(this);
 
             // Destroy object

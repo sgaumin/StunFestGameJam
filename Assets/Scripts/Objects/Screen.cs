@@ -77,7 +77,9 @@ public class Screen : MonoBehaviour
     {
         while (true)
         {
-            var position = plugIn.transform.position;
+            //var position = plugIn.transform.position;
+            var position = cableController.GetMessageStartingPosition();
+
             position.z = -8f;
 
             var messageTemp = Instantiate(messagePrefab, position, Quaternion.identity);

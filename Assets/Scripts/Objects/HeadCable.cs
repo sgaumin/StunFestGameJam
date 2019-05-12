@@ -39,31 +39,51 @@ public class HeadCable : MonoBehaviour
             {
                 if (!isPlug)
                 {
-                    if (headType == HeadType.FirstHead)
+                    if (!plug.isUsed)
                     {
-                        if (!plug.isUsed && plug.plugType == PlugType.In)
+                        if((plug.plugType == PlugType.In) && !_cableController.firstHeadPlugged)
                         {
                             ConnectHead(plug.transform.position);
                             plug.isUsed = true;
                             plug.cableController = _cableController;
-
+                            _cableController.firstHeadPlugged = true;
+                            headType = HeadType.FirstHead;
                             this.plug = plug;
                             _cableController.screen = this.plug.GetComponentInParent<Screen>();
-                            _cableController.ActiveSecondHead();
+
+                            if (! (_cableController.firstHeadPlugged && _cableController.secondHeadPlugged))
+                            {
+                                _cableController.ActiveSecondHead();
+                            }
+                            else
+                            {
+                                _cableController.firstPluggedHead = HeadType.SecondHead;
+                                _cableController.ActiveConnection();
+                            }
+
                         }
-                    }
-                    else if (headType == HeadType.SecondHead)
-                    {
-                        if (!plug.isUsed && plug.plugType == PlugType.Out)
+                        else if(plug.plugType == PlugType.Out && !_cableController.secondHeadPlugged)
                         {
                             ConnectHead(plug.transform.position);
                             plug.isUsed = true;
                             plug.cableController = _cableController;
+                            _cableController.secondHeadPlugged = true;
+                            headType = HeadType.SecondHead;
 
                             this.plug = plug;
-                            _cableController.ActiveConnection();
+                            if (!(_cableController.firstHeadPlugged && _cableController.secondHeadPlugged))
+                            {
+                                _cableController.ActiveSecondHead();
+                            }
+                            else
+                            {
+                                _cableController.firstPluggedHead = HeadType.FirstHead;
+                                _cableController.ActiveConnection();
+                            }
+
                         }
                     }
+
                 }
             }
         }

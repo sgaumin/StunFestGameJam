@@ -9,6 +9,10 @@ public class CableController : MonoBehaviour
     public Screen screen;
     public bool isConnected;
 
+    public bool firstHeadPlugged = false;
+    public bool secondHeadPlugged = false;
+    public HeadType firstPluggedHead;
+
     public GameObject cable;
 
     private void Awake()
@@ -41,4 +45,44 @@ public class CableController : MonoBehaviour
             screen.StartSendingMessage();
         }
     }
+
+
+    public Vector3 GetMessageStartingPosition()
+    {
+        Vector3 position = new Vector3();
+
+        if(firstPluggedHead == HeadType.FirstHead) //in branché ne premier
+        {
+            position = firstHead.plug.transform.position;
+        } else // out branché en premier
+        {
+            position = secondHead.plug.transform.position;
+        }
+
+        return position;
+    }
+
+
+    public HeadCable GetInHead()
+    {
+        if(firstPluggedHead == HeadType.FirstHead)
+        {
+            return firstHead;
+        } else
+        {
+        }
+    }
+
+    public HeadCable GetOutHead()
+    {
+        if (firstPluggedHead == HeadType.FirstHead)
+        {
+            return secondHead;
+        }
+        else
+        {
+            return firstHead;
+        }
+    }
+
 }
