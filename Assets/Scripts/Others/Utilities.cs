@@ -12,14 +12,14 @@ public enum GameStates
 public enum PlugType
 {
     In,
-    Out,
+    Out
 }
 
 [Serializable]
 public enum ScreenStates
 {
     Display,
-    Mire,
+    Mire
 }
 
 [Serializable]

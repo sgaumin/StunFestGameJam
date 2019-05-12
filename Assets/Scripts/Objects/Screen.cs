@@ -7,7 +7,7 @@ public class Screen : MonoBehaviour
 {
 #pragma warning disable 0649 
 
-    public ScreenStates screenState = ScreenStates.Display;
+    public ScreenStates screenState;
 
     [SerializeField] private Plug plugIn;
     [SerializeField] private Message messagePrefab;
@@ -26,6 +26,8 @@ public class Screen : MonoBehaviour
 
     private void Start()
     {
+        screenState = ScreenStates.Display;
+        
         _screen = GetComponent<ScreenController>();
 
         GenerateMessage();
@@ -134,6 +136,8 @@ public class Screen : MonoBehaviour
         screenState = ScreenStates.Mire;
         GameSystem.Instance.screenMire++;
 
+        GameSystem.Instance.screensDisplay.Remove(this);
+        
         // Show Mire
         mire.SetActive(true);
 
@@ -146,5 +150,7 @@ public class Screen : MonoBehaviour
         // if demand message was created
         if (demandGenerated)
             GameSystem.Instance.messageReceived++;
+
+        Debug.Log("_screens2 length = " + GameSystem.Instance.screensDisplay.Count);
     }
 }
