@@ -146,11 +146,8 @@ public class Screen : MonoBehaviour
 
         // Stop Timer
 
-
         // if demand message was created
         if (demandGenerated)
             GameSystem.Instance.messageReceived++;
-
-        Debug.Log("_screens2 length = " + GameSystem.Instance.screensDisplay.Count);
     }
 }
