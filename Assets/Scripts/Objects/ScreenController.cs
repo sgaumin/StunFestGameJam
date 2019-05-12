@@ -45,7 +45,7 @@ public class ScreenController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(bubble.activeSelf)
+        if (bubble.activeSelf)
         {
             if (totalTime <= timerTime)
             {
@@ -55,10 +55,13 @@ public class ScreenController : MonoBehaviour
             }
             else
             {
-                _screen.ScreenOver();
+                if (_screen.screenState == ScreenStates.Display)
+                {
+                    HideBubble();
+                    _screen.ScreenOver();
+                }
             }
         }
-
     }
 
     public void SetBackground(MessageColors color)
@@ -78,6 +81,7 @@ public class ScreenController : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException();
         }
+
         backgroundFileName += ".png";
 
         int backgroundWidth = 416;
@@ -89,7 +93,6 @@ public class ScreenController : MonoBehaviour
         backgroundTexture.LoadImage(bytes);
         background.sprite = Sprite.Create(backgroundTexture, new Rect(0, 0, backgroundWidth, backgroundHeight),
             new Vector2(0.5f, 0.0f), 1.0f);
-
     }
 
     public void ResetTimer()

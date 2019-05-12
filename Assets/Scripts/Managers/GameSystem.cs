@@ -9,15 +9,16 @@ public class GameSystem : MonoBehaviour
 
     public GameStates gameState = GameStates.Play;
 
-    private Screen[] _screens;
-    private List<Screen> _screensDisplay = new List<Screen>();
-    private int _nbPhase;
-
     [HideInInspector] public int messageReceived;
     [HideInInspector] public int screenMire;
     [SerializeField] private float minTime = 2f;
     [SerializeField] private float maxTime = 5f;
     [SerializeField] private int limitScreenMire = 4;
+    
+    private Screen[] _screens;
+    private List<Screen> _screensDisplay = new List<Screen>();
+    private int _nbPhase;
+    private float _timeScore;
 
     private void Awake()
     {
@@ -71,6 +72,9 @@ public class GameSystem : MonoBehaviour
                 _nbPhase++;
                 StartCoroutine(GenerateWave());
             }
+            
+            // Update Time Score
+            _timeScore += Time.deltaTime;
         }
     }
 
@@ -84,16 +88,18 @@ public class GameSystem : MonoBehaviour
             yield return new WaitForSeconds(Random.Range(minTime, maxTime));
 
             // Verify if Screens already spawns a message
-            InitScreenArray();
-            numbInteraction = Mathf.Min(_nbPhase, _screensDisplay.Count);
-            Debug.Log("Interactions: " + numbInteraction);
+//            InitScreenArray();
+//            numbInteraction = Mathf.Min(_nbPhase, _screensDisplay.Count);
 
             int rand = Random.Range(0, _screensDisplay.Count);
 
-            while (_screensDisplay[rand].demandGenerated)
+            Debug.Log("Houba");
+            
+            while (_screensDisplay[rand].demandGenerated || _screensDisplay[rand].screenState == ScreenStates.Mire)
                 rand = Random.Range(0, _screensDisplay.Count);
 
             // Spawn message
+            Debug.Log(_screens[rand].gameObject.name);
             _screens[rand].GenerateDemand();
         }
     }

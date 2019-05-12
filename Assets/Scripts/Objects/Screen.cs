@@ -77,20 +77,25 @@ public class Screen : MonoBehaviour
     {
         while (true)
         {
-            //var position = plugIn.transform.position;
-            var position = cableController.GetMessageStartingPosition();
+            if (screenState == ScreenStates.Display)
+            {
+                //var position = plugIn.transform.position;
+                var position = cableController.GetMessageStartingPosition();
 
-            position.z = -8f;
+                position.z = -8f;
 
-            var messageTemp = Instantiate(messagePrefab, position, Quaternion.identity);
-            messageTemp.messageColor = _message.messageColor;
-            messageTemp.messageShape = _message.messageShape;
-            messageTemp.InitMessage();
+                var messageTemp = Instantiate(messagePrefab, position, Quaternion.identity);
+                messageTemp.messageColor = _message.messageColor;
+                messageTemp.messageShape = _message.messageShape;
+                messageTemp.InitMessage();
 
-            messageTemp.cableController = cableController;
-            messageTemp.FollowCable();
+                messageTemp.cableController = cableController;
+                messageTemp.FollowCable();
 
-            yield return new WaitForSeconds(5f);
+                yield return new WaitForSeconds(5f);
+            }
+            else
+                break;
         }
     }
 
@@ -125,6 +130,10 @@ public class Screen : MonoBehaviour
 
     public void ScreenOver()
     {
+        // Update Status
+        screenState = ScreenStates.Mire;
+        GameSystem.Instance.screenMire++;
+
         // Show Mire
         mire.SetActive(true);
 
@@ -137,9 +146,5 @@ public class Screen : MonoBehaviour
         // if demand message was created
         if (demandGenerated)
             GameSystem.Instance.messageReceived++;
-
-        // Update Status
-        GameSystem.Instance.screenMire++;
-        screenState = ScreenStates.Mire;
     }
 }
