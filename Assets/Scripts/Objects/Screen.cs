@@ -139,6 +139,7 @@ public class Screen : MonoBehaviour
             GameSystem.Instance.messageReceived++;
 
         // Update Status
+        GameSystem.Instance.screenMire++;
         screenState = ScreenStates.Mire;
     }
 }
