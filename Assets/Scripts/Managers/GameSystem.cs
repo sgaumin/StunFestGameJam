@@ -11,16 +11,18 @@ public class GameSystem : MonoBehaviour
     public GameStates gameState = GameStates.Play;
 
     [HideInInspector] public int messageReceived;
-    [HideInInspector] public int screenMire;
+    [HideInInspector] public int screenMire = 0;
     [SerializeField] private float minTime = 2f;
     [SerializeField] private float maxTime = 5f;
     [SerializeField] private int limitScreenMire = 4;
 
-    private Screen[] _screens;
-    public List<Screen> screensDisplay = new List<Screen>();
+    [HideInInspector] public List<Screen> screensDisplay = new List<Screen>();
     private int _nbPhase;
     private float _timeScore;
     private int _numbInteraction;
+
+    [SerializeField] private SpriteRenderer spriteRendererHeart;
+    [SerializeField] private Sprite[] spriteHearts;
 
     private void Awake()
     {
@@ -32,7 +34,6 @@ public class GameSystem : MonoBehaviour
 
     private void Start()
     {
-        _screens = FindObjectsOfType<Screen>();
         screensDisplay = FindObjectsOfType<Screen>().ToList();
 
         _nbPhase = 1;
@@ -48,7 +49,7 @@ public class GameSystem : MonoBehaviour
             if (screenMire == limitScreenMire)
             {
                 // Game Over
-                GameOver();
+                StartCoroutine(GameOver());
             }
 
 //            Debug.Log(messageReceived + "/" + _nbPhase);
@@ -113,13 +114,26 @@ public class GameSystem : MonoBehaviour
         }
     }
 
-    private void GameOver()
+    private IEnumerator GameOver()
     {
-        Debug.Log("Game Over");
-
         // Update Game State
         gameState = GameStates.GameOver;
+        Debug.Log("Game Over");
+
+        yield return new WaitForSeconds(3f);
 
         // Show GameOver Screen
+
+        // Load Menu
+        LevelManager.Instance.LoadMenu();
+    }
+
+    public void UpdateLife()
+    {
+        screenMire++;
+        if (screenMire < limitScreenMire)
+            spriteRendererHeart.sprite = spriteHearts[screenMire];
+        else if (screenMire == limitScreenMire)
+            spriteRendererHeart.sprite = null;
     }
 }

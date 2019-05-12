@@ -1064,7 +1064,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: bc5cca9ef27014942adcc97dcc99851f, type: 3}
   - {fileID: 21300000, guid: d05628f678e84634dbf6440c0434367f, type: 3}
   - {fileID: 21300000, guid: dd63d6405d3320a4eb9458ef8cea3ff2, type: 3}
-  timerTime: 15
+  timerTime: 100
   timerFill: {fileID: 5150698631726000988}
 --- !u!114 &4834329565587165810
 MonoBehaviour:
