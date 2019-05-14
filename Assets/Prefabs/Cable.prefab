@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 870538890656321364}
   - component: {fileID: 6420657557002512850}
   - component: {fileID: 1101083628047787819}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Head 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -245,7 +245,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1681951946239525351}
   - component: {fileID: 1681951946239525345}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -299,7 +299,7 @@ GameObject:
   - component: {fileID: 1681951946294383315}
   - component: {fileID: 1681951946294383313}
   - component: {fileID: 1681951946294383314}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Line
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -523,7 +523,7 @@ GameObject:
   - component: {fileID: 651800168276344207}
   - component: {fileID: 1681951946563315980}
   - component: {fileID: 1071170826775697710}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Head 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -753,7 +753,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4522414118791306041}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: EndLine
   m_TagString: Untagged
   m_Icon: {fileID: 0}

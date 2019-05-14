@@ -104,7 +104,7 @@ public class HeadCable : MonoBehaviour
         Deconect();
     }
 
-    private void Deconect()
+    public void Deconect()
     {
         if (_cableController.isConnected)
         {
@@ -117,7 +117,7 @@ public class HeadCable : MonoBehaviour
             if (_cableController != null)
                 if (_cableController.screen != null)
                     _cableController.screen.StopAllCoroutines();
-        }
+        } 
     }
 
     private void PlayPlugSound()
