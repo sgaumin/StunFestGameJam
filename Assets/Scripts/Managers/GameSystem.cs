@@ -59,7 +59,6 @@ public class GameSystem : MonoBehaviour
 
             if (messageReceived == _numbInteraction)
             {
-                Debug.Log("End Phase");
                 messageReceived = 0;
                 _nbPhase++;
                 StartCoroutine(GenerateWave());
@@ -72,8 +71,6 @@ public class GameSystem : MonoBehaviour
 
     private IEnumerator GenerateWave()
     {
-        Debug.Log("Generate");
-
         yield return new WaitForSeconds(2f);
 
         _numbInteraction = Mathf.Min(_nbPhase, screensDisplay.Count);
@@ -89,14 +86,11 @@ public class GameSystem : MonoBehaviour
             while (!check)
             {
                 rand = Random.Range(0, screensDisplay.Count);
-                Debug.Log("Houba" + rand);
 
                 if (!randAlreadyCreate.Contains(rand))
                 {
                     if (screensDisplay[rand].screenState == ScreenStates.Display)
                     {
-                        Debug.Log(screensDisplay[rand].screenState);
-
                         if (!screensDisplay[rand].demandGenerated)
                         {
                             check = true;
@@ -118,7 +112,6 @@ public class GameSystem : MonoBehaviour
     {
         // Update Game State
         gameState = GameStates.GameOver;
-        Debug.Log("Game Over");
 
         yield return new WaitForSeconds(3f);
 

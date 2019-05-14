@@ -8,7 +8,7 @@ public class MouseManager : MonoBehaviour
 
     [SerializeField] private CableController cablePrefab;
 
-    private GameObject _currentObjectToDrag;
+    public HeadCable currentHeadCableToDrag;
     private CableController _cable;
 
     private void Awake()
@@ -21,34 +21,34 @@ public class MouseManager : MonoBehaviour
 
     private void Update()
     {
-        if (_currentObjectToDrag != null)
+        if (currentHeadCableToDrag != null)
         {
             Vector3 dragPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             dragPosition.z = -2f;
 
-            _currentObjectToDrag.transform.position = dragPosition;
+            currentHeadCableToDrag.transform.position = dragPosition;
         }
     }
 
     public void StartDraggingFirstHead()
     {
-        if (_currentObjectToDrag == null)
+        if (currentHeadCableToDrag == null)
         {
             _cable = Instantiate(cablePrefab, transform.position, Quaternion.identity);
-            _currentObjectToDrag = _cable.firstHead.gameObject;
+            currentHeadCableToDrag = _cable.firstHead;
         }
     }
 
     public void StartDraggingSecondHead()
     {
-        if (_currentObjectToDrag == null)
+        if (currentHeadCableToDrag == null)
         {
-            _currentObjectToDrag = _cable.secondHead.gameObject;
+            currentHeadCableToDrag = _cable.secondHead;
         }
     }
 
     public void EndDragging()
     {
-        _currentObjectToDrag = null;
+        currentHeadCableToDrag = null;
     }
 }

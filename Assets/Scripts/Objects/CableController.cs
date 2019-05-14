@@ -38,6 +38,12 @@ public class CableController : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         isConnected = true;
 
+        // Change Layer
+        foreach (Transform trans in GetComponentsInChildren<Transform>(true))
+        {
+            trans.gameObject.layer = 0; // Default Layer
+        }
+        
         // Launch Message from the screen to cable
         if (screen != null)
         {
